@@ -5,6 +5,7 @@
 /mentum-frontend/node_modules
 /.pnp
 .pnp.js
+/mentum-backend/.env
 
 # testing
 /coverage

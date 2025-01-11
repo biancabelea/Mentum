@@ -59,32 +59,32 @@ form textarea {
 }
 
 .radio-group-container {
-    width: 100%; /* Match the width of other input fields */
+    width: 100%;
     margin-bottom: 16px;
 }
 
 .radio-group {
     display: flex;
-    flex-direction: row; /* Stack radio options vertically */
-    align-items: flex-start; /* Align everything to the left */
+    flex-direction: row;
+    align-items: flex-start;
     justify-content: flex-start;
 }
 
 .radio-option {
     display: flex;
     flex-direction: row;
-    align-items: center; /* Align the radio button and label vertically */
-    gap: 8px; /* Space between the radio button and label */
-    padding-left: 2px; /* Fine-tune alignment to match text fields */
+    align-items: center;
+    gap: 8px;
+    padding-left: 2px;
 }
 
 .radio-option input[type="radio"] {
-    margin: 0; /* Remove default browser margin */
-    transform: translateY(1px); /* Adjust vertical alignment */
+    margin: 0;
+    transform: translateY(1px);
 }
 
 .radio-option label {
-    font-weight: bold; /* Make labels consistent with other fields */
+    font-weight: bold;
     color: var(--dark-blue);
 }
 

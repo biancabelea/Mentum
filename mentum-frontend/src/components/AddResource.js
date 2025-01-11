@@ -29,9 +29,9 @@ function AddResource() {
         formDataObj.append('description', formData.description);
     
         if (useFileUpload) {
-            formDataObj.append('file', file); // Attach the file
+            formDataObj.append('file', file);
         } else {
-            formDataObj.append('fileUrl', formData.fileUrl); // Attach the file URL
+            formDataObj.append('fileUrl', formData.fileUrl);
         }
     
         try {

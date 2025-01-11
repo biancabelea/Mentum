@@ -25,10 +25,8 @@ function Login() {
             });
             console.log('Login successful:', response.data);
 
-            // Save the token in localStorage
             localStorage.setItem('token', response.data.token);
 
-            // Redirect to home or dashboard
             navigate('/');
         } catch (error) {
             setError(error.response?.data?.message || 'Something went wrong');

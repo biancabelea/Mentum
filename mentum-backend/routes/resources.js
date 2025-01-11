@@ -1,5 +1,5 @@
 const express = require('express');
-const multer = require('multer'); // Import multer
+const multer = require('multer');
 const Resource = require('../models/Resource');
 const authMiddleware = require('../middleware/authMiddleware');
 const uploadMiddleware = require('../middleware/uploadMiddleware');
@@ -18,8 +18,8 @@ router.post('/resources', authMiddleware, (req, res, next) => {
     });
 }, async (req, res) => {
     try {
-        console.log('Request Body:', req.body); // Log the request body
-        console.log('Uploaded File:', req.file); // Log the uploaded file details
+        console.log('Request Body:', req.body);
+        console.log('Uploaded File:', req.file);
 
         const { title, description, fileUrl } = req.body;
 
@@ -54,7 +54,6 @@ router.post('/resources', authMiddleware, (req, res, next) => {
     }
 });
 
-// Get resources with pagination and search
 router.get('/resources', async (req, res) => {
     try {
         const { search, page = 1, limit = 10 } = req.query;

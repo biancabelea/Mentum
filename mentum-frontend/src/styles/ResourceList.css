@@ -63,6 +63,7 @@
     text-align: left;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     gap: 12px;
 }
 
@@ -96,6 +97,23 @@
     font-style: italic;
 }
 
+.delete-button {
+    background: none;
+    border: none;
+    color: var(--orange);
+    font-size: 18px;
+    cursor: pointer;
+    margin-left: auto;
+    align-self: flex-end;
+    transition: color 0.3s ease;
+    margin-top: 0;
+}
+
+.delete-button:hover {
+    color: var(--dark-blue);
+    background: none;
+}
+
 .add-button {
     position: fixed;
     top: 20px;
@@ -126,6 +144,24 @@
     font-size: 18px;
     margin-top: 20px;
     text-align: center;
+}
+
+.my-resources-button {
+    background-color: var(--orange);
+    color: var(--white);
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    margin-top: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 30%;
+}
+
+.my-resources-button:hover {
+    background-color: var(--dark-blue);
+    color: var(--white);
 }
 
 @media (max-width: 768px) {

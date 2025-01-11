@@ -93,5 +93,32 @@ router.get('/resources/my', authMiddleware, async (req, res) => {
     }
 });
 
+// Delete a resource
+router.delete('/resources/:id', authMiddleware, async (req, res) => {
+    try {
+        const resourceId = req.params.id;
+        const userId = req.user._id;
+
+        // Find the resource to delete
+        const resource = await Resource.findById(resourceId);
+
+        if (!resource) {
+            return res.status(404).json({ message: 'Resource not found' });
+        }
+
+        // Check if the logged-in user is the owner of the resource
+        if (resource.uploadedBy.toString() !== userId.toString()) {
+            return res.status(403).json({ message: 'You are not authorized to delete this resource' });
+        }
+
+        // Delete the resource
+        await Resource.findByIdAndDelete(resourceId);
+
+        res.status(200).json({ message: 'Resource deleted successfully' });
+    } catch (error) {
+        console.error('Error deleting resource:', error);
+        res.status(500).json({ message: 'Error deleting resource', error: error.message });
+    }
+});
 
 module.exports = router;

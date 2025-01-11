@@ -6,7 +6,6 @@
 /.pnp
 .pnp.js
 /mentum-backend/.env
-/mentum-backend/uploads
 
 # testing
 /coverage

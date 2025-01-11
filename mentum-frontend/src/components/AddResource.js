@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/AddResource.css';
 
@@ -11,6 +12,7 @@ function AddResource() {
     const [file, setFile] = useState(null);
     const [useFileUpload, setUseFileUpload] = useState(false);
     const [message, setMessage] = useState('');
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -48,6 +50,7 @@ function AddResource() {
                 },
             });
             setMessage('Resource added successfully!');
+            navigate('/resources/my');
         } catch (error) {
             console.error('Error adding resource:', error);
             setMessage('Failed to add resource.');

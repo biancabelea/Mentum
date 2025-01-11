@@ -26,7 +26,7 @@
     background-color: var(--grey);
     max-width: 500px;
     width: 90%;
-    padding: 20px 30px; /* Reduced padding for a smaller height */
+    padding: 20px 30px;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     display: flex;
@@ -40,7 +40,7 @@ form {
 
 label {
     display: block;
-    margin-bottom: 5px; /* Slightly reduced spacing */
+    margin-bottom: 5px;
     font-weight: bold;
     color: var(--dark-blue);
     font-size: 16px;
@@ -50,8 +50,8 @@ label {
 input,
 select {
     width: 100%;
-    padding: 10px; /* Reduced padding for inputs */
-    margin-bottom: 15px; /* Reduced margin for tighter spacing */
+    padding: 10px;
+    margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 14px;
@@ -65,7 +65,7 @@ button {
     border: none;
     border-radius: 5px;
     font-size: 16px;
-    margin-top: 15px; /* Reduced spacing */
+    margin-top: 15px;
     cursor: pointer;
     width: 100%;
 }
@@ -76,8 +76,8 @@ button:hover {
 }
 
 .title {
-    font-size: 22px; /* Slightly smaller title */
-    margin-bottom: 15px; /* Reduced spacing below title */
+    font-size: 22px;
+    margin-bottom: 15px;
     color: var(--dark-blue);
     text-align: center;
 }

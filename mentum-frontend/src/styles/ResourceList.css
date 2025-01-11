@@ -1,0 +1,140 @@
+:root {
+    --white: #ffffff;
+    --grey: #e5e5e5;
+    --orange: #fca311;
+    --dark-blue: #14213d;
+    --black: #000000;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.resources-page {
+    background-color: var(--dark-blue);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.resources-title {
+    background-color: var(--orange);
+    width: 80%;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 24px;
+    margin: 0 auto 20px auto;
+    padding: 10px;
+    color: var(--white);
+}
+
+.search-input {
+    width: 50%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid var(--grey);
+    margin: 20px auto;
+    font-size: 16px;
+}
+
+.body-cards {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 20px;
+    min-height: 300px;
+}
+
+.card {
+    background-color: var(--white);
+    border: 1px solid var(--grey);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: calc(100% / 3 - 20px);
+    max-width: 300px;
+    min-width: 250px;
+    padding: 20px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.card h3 {
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--dark-blue);
+}
+
+.card p {
+    font-size: 14px;
+    color: var(--grey);
+    font-weight: normal;
+}
+
+.card a {
+    font-size: 14px;
+    color: var(--orange);
+    text-decoration: none;
+    align-self: flex-end;
+}
+
+.card a:hover {
+    text-decoration: underline;
+}
+
+.uploaded-by {
+    font-size: 12px;
+    color: var(--grey);
+    margin-top: 8px;
+    font-style: italic;
+}
+
+.add-button {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: var(--orange);
+    color: var(--white);
+    border: none;
+    border-radius: 50%;
+    width: 50px; 
+    height: 50px;
+    font-size: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+}
+
+.add-button:hover {
+    background-color: var(--dark-blue);
+    color: var(--white);
+}
+
+.no-resources-message,
+.loading-message {
+    color: var(--white);
+    font-size: 18px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .body-cards {
+        justify-content: flex-start;
+    }
+
+    .card {
+        width: 100%;
+        max-width: 100%;
+    }
+}

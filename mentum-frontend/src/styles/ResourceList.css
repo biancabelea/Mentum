@@ -89,6 +89,13 @@
     text-decoration: underline;
 }
 
+.uploaded-by {
+    font-size: 12px;
+    color: var(--grey);
+    margin-top: 8px;
+    font-style: italic;
+}
+
 .add-button {
     position: fixed;
     top: 20px;

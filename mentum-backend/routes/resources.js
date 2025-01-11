@@ -80,16 +80,18 @@ router.get('/resources', async (req, res) => {
     }
 });
 
-//Get my resources
+// Get my resources
 router.get('/resources/my', authMiddleware, async (req, res) => {
     try {
         const userId = req.user._id;
-        const userResources = await Resource.find({ uploadedBy: userId });
+        const userResources = await Resource.find({ uploadedBy: userId })
+            .populate('uploadedBy', 'name email'); //join the users collection and retrieve the name and email fields based on uploadedBy
         res.status(200).json({ resources: userResources });
     } catch (error) {
         console.error('Error fetching user resources:', error);
-        res.status(500).json({ message: 'Error fetching resources' });
+        res.status(500).json({ message: 'Error fetching resources', error: error.message });
     }
 });
+
 
 module.exports = router;

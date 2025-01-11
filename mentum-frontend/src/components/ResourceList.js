@@ -52,6 +52,7 @@ function ResourceList() {
                         <div className="card" key={resource._id}>
                             <h3>{resource.title}</h3>
                             <p>{resource.description}</p>
+                            <p className="uploaded-by">Uploaded by: {resource.uploadedBy?.name || 'Unknown'}</p>
                             <a href={resource.fileUrl} target="_blank" rel="noreferrer">
                                 View Resource
                             </a>

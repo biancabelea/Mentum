@@ -30,6 +30,10 @@ function ResourceList() {
         window.location.href = '/add-resource';
     };
 
+    const navigateToMyResources = () => {
+        window.location.href = '/resources/my';
+    };
+
     return (
         <div className="resources-page">
             <div className="resources-title">All Resources</div>
@@ -41,6 +45,10 @@ function ResourceList() {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
             />
+
+            <button className="my-resources-button" onClick={navigateToMyResources}>
+                My Resources
+            </button>
 
             {loading ? (
                 <p className="loading-message">Loading resources...</p>

@@ -146,6 +146,24 @@
     text-align: center;
 }
 
+.my-resources-button {
+    background-color: var(--orange);
+    color: var(--white);
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    margin-top: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 30%;
+}
+
+.my-resources-button:hover {
+    background-color: var(--dark-blue);
+    color: var(--white);
+}
+
 @media (max-width: 768px) {
     .body-cards {
         justify-content: flex-start;

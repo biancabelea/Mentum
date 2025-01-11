@@ -5,6 +5,7 @@ import Register from './components/Register';
 import Login from './components/Login';
 import AddResource from './components/AddResource';
 import ResourceList from './components/ResourceList';
+import MyResources from './components/MyResources';
 
 function App() {
     return (
@@ -14,6 +15,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/add-resource" element={<AddResource />} />
             <Route path="/resources" element={<ResourceList />} />
+            <Route path="/resources/my" element={<MyResources />} />
         </Routes>
     );
 }

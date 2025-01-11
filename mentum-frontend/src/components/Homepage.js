@@ -36,10 +36,10 @@ function Homepage() {
                     {loggedIn ? (
                         <nav>
                             <a href="/mentors-search" className="mentors-button">
-                                <button>Search for mentors</button>
+                                <button>Search for Mentors</button>
                             </a>
-                            <a href="/view-resources" className="resources-button">
-                                <button>Resources</button>
+                            <a href="/resources" className="resources-button">
+                                <button>All Resources</button>
                             </a>
                         </nav>
                     ) : null}

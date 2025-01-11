@@ -5,6 +5,7 @@ const authMiddleware = require('../middleware/authMiddleware');
 const uploadMiddleware = require('../middleware/uploadMiddleware');
 const router = express.Router();
 
+//Add a resource
 router.post('/resources', authMiddleware, (req, res, next) => {
     uploadMiddleware.single('file')(req, res, (err) => {
         if (err instanceof multer.MulterError) {
@@ -54,6 +55,7 @@ router.post('/resources', authMiddleware, (req, res, next) => {
     }
 });
 
+//Get all resources
 router.get('/resources', async (req, res) => {
     try {
         const { search, page = 1, limit = 10 } = req.query;
@@ -75,6 +77,18 @@ router.get('/resources', async (req, res) => {
     } catch (error) {
         console.error('Error Fetching Resources:', error);
         res.status(500).json({ message: 'Error fetching resources', error: error.message });
+    }
+});
+
+//Get my resources
+router.get('/resources/my', authMiddleware, async (req, res) => {
+    try {
+        const userId = req.user._id;
+        const userResources = await Resource.find({ uploadedBy: userId });
+        res.status(200).json({ resources: userResources });
+    } catch (error) {
+        console.error('Error fetching user resources:', error);
+        res.status(500).json({ message: 'Error fetching resources' });
     }
 });
 

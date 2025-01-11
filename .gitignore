@@ -5,7 +5,7 @@
 /mentum-frontend/node_modules
 /.pnp
 .pnp.js
-.env
+/mentum-backend/.env
 /mentum-backend/uploads
 
 # testing

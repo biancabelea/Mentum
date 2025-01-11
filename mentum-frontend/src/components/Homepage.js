@@ -31,15 +31,15 @@ function Homepage() {
                 )}
             </nav>
             <div className="homeContent">
-                <p>Study Hub: Connect, Learn, Thrive. Quality tutoring at your fingertips!</p>
+                <p>Mentum: Connect, Learn, Thrive. Quality tutoring at your fingertips!</p>
                 <div className="buttons">
                     {loggedIn ? (
                         <nav>
                             <a href="/mentors-search" className="mentors-button">
-                                <button>Search for mentors</button>
+                                <button>Search for Mentors</button>
                             </a>
-                            <a href="/view-resources" className="resources-button">
-                                <button>Resources</button>
+                            <a href="/resources" className="resources-button">
+                                <button>All Resources</button>
                             </a>
                         </nav>
                     ) : null}

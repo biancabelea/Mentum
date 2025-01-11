@@ -31,7 +31,7 @@ function Homepage() {
                 )}
             </nav>
             <div className="homeContent">
-                <p>Study Hub: Connect, Learn, Thrive. Quality tutoring at your fingertips!</p>
+                <p>Mentum: Connect, Learn, Thrive. Quality tutoring at your fingertips!</p>
                 <div className="buttons">
                     {loggedIn ? (
                         <nav>

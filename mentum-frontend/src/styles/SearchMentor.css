@@ -44,46 +44,58 @@ h1 {
     max-width: 400px;
 }
 
-/* Autocomplete input styling */
-.MuiAutocomplete-root {
+/* Autocomplete root styling */
+.searchContent .MuiAutocomplete-root {
     width: 100%;
-    background-color: transparent; /* Ensure background blends with the page */
-    color: var(--white);
+    background-color: transparent;
+    color: var(--white); /* Ensure input text is white */
 }
 
-.MuiAutocomplete-inputRoot {
-    color: var(--white); /* Text color white */
-    border-radius: 8px; /* Smooth edges */
-    border: 1px solid var(--grey); /* Light border for outline */
-    padding: 8px; /* Comfortable padding */
-}
 
 /* Label ("Select Skills") */
-.MuiInputLabel-root {
+.searchContent .MuiInputLabel-root {
     color: var(--white); /* Label color */
 }
 
-.MuiInputLabel-root.Mui-focused {
-    color: var(--white); /* Label stays white when focused */
+.searchContent .MuiInputLabel-root.Mui-focused {
+    color: var(--white); /* Label remains white when focused */
 }
 
-.MuiAutocomplete-clearIndicator {
-    color: var(--white); /* Clear icon (X) color */
+.searchContent .MuiInputLabel-root {
+    color: var(--white) !important; /* Force label color to white */
 }
 
-.MuiAutocomplete-popupIndicator {
-    color: var(--white); /* Dropdown arrow color */
+.searchContent .MuiInputLabel-root.Mui-focused {
+    color: var(--white) !important; /* Keep label white when focused */
 }
 
-/* Selected skills styling */
-.MuiChip-root {
+.searchContent .MuiAutocomplete-inputRoot {
+    color: var(--white); /* Input text color */
+    border-radius: 8px;
+    border: 1px solid var(--grey); /* Light border for outline */
+    padding: 8px;
+}
+
+.searchContent .MuiAutocomplete-input {
+    color: var(--white) !important; /* Text inside the input */
+}
+
+.searchContent .MuiChip-root {
     background-color: var(--dark-blue); /* Chip background */
-    color: var(--white); /* Chip text color */
+    color: var(--white) !important; /* Chip text color */
     font-size: 14px;
 }
 
-.MuiChip-deleteIcon {
-    color: var(--white); /* Delete (X) icon on chips */
+.searchContent .MuiChip-deleteIcon {
+    color: var(--white) !important; /* Delete (X) icon on chips */
+}
+
+.searchContent .MuiAutocomplete-clearIndicator {
+    color: var(--white) !important; /* Clear (X) icon color */
+}
+
+.searchContent .MuiAutocomplete-popupIndicator {
+    color: var(--white) !important; /* Dropdown arrow color */
 }
 
 /* Button Styling */
@@ -145,6 +157,24 @@ h1 {
     font-size: 14px;
     color: var(--grey);
     font-weight: normal;
+}
+
+.mentor-card button {
+    background-color: var(--orange);
+    color: var(--white);
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 14px;
+    cursor: pointer;
+    align-self: center; /* Center the button horizontally */
+    margin-top: 10px;
+    width: 80%; /* Make the button span 80% of the card width */
+}
+
+.mentor-card button:hover {
+    background-color: var(--dark-blue);
+    color: var(--white);
 }
 
 /* Responsive Design */

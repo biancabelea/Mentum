@@ -46,47 +46,54 @@ const SearchMentor = () => {
     }
   };
 
+  const handleRequestMeeting = (mentor) => {
+    console.log(`Requesting a meeting with ${mentor.name}`);
+    // Add your logic here to handle the meeting request
+    // For example: open a modal, redirect to a new page, etc.
+  };
+
   return (
-<div className="searchContent">
-    <h1>Search for Mentors</h1>
-    <div className="input-container">
+    <div className="searchContent">
+      <h1>Search for Mentors</h1>
+      <div className="input-container">
         <Autocomplete
-            multiple
-            id="skills-autocomplete"
-            value={userSkills}
-            onChange={handleSkillsChange}
-            options={skills.sort()}
-            renderTags={(tagValue, getTagProps) =>
-                tagValue.map((option, index) => {
-                    const tagProps = getTagProps({ index });
-                    return <Chip key={option} label={option} {...tagProps} />;
-                })
-            }
-            renderInput={(params) => <TextField {...params} label="Select Skills" />}
+          multiple
+          id="skills-autocomplete"
+          value={userSkills}
+          onChange={handleSkillsChange}
+          options={skills.sort()}
+          renderTags={(tagValue, getTagProps) =>
+            tagValue.map((option, index) => {
+              const tagProps = getTagProps({ index });
+              return <Chip key={option} label={option} {...tagProps} />;
+            })
+          }
+          renderInput={(params) => <TextField {...params} label="Select Skills" />}
         />
         <button onClick={handleSearch} disabled={loading} className="search-button">
-            {loading ? 'Searching...' : 'Search'}
+          {loading ? 'Searching...' : 'Search'}
         </button>
-    </div>
-    <div className="results">
+      </div>
+      <div className="results">
         {searched && (
-            <>
-                {matchingMentors.length > 0 && matchingMentors[0].name !== '' ? (
-                    matchingMentors.map((mentor, index) => (
-                        <div key={index} className="mentor-card">
-                            <h3>{mentor.name}</h3>
-                            <p>Matched Skills: {mentor.matchingSkills.join(', ')}</p>
-                        </div>
-                    ))
-                ) : (
-                    <div className="mentor-card">
-                        <p>No mentors match the selected skills.</p>
-                    </div>
-                )}
-            </>
+          <>
+            {matchingMentors.length > 0 && matchingMentors[0].name !== '' ? (
+              matchingMentors.map((mentor, index) => (
+                <div key={index} className="mentor-card">
+                  <h3>{mentor.name}</h3>
+                  <p>Matched Skills: {mentor.matchingSkills.join(', ')}</p>
+                  <button onClick={() => handleRequestMeeting(mentor)}>Request a Meeting</button>
+                </div>
+              ))
+            ) : (
+              <div className="mentor-card">
+                <p>No mentors match the selected skills.</p>
+              </div>
+            )}
+          </>
         )}
+      </div>
     </div>
-</div>
   );
 };
 

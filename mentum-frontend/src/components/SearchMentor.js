@@ -77,20 +77,22 @@ const SearchMentor = () => {
       <div className="results">
     {searched && (
         <>
-            {matchingMentors.length > 0 && matchingMentors[0].name !== '' ? (
+            {matchingMentors.length > 0 ? (
                 matchingMentors.map((mentor, index) => (
                     <div key={index} className="mentor-card">
-                        <h3>{mentor.name}</h3>
+                        <h3>
+                            <a href={`/user-profile/${mentor._id}`} className="mentor-link">
+                                {mentor.name}
+                            </a>
+                        </h3>
                         <p>Matched Skills: {mentor.matchingSkills.join(', ')}</p>
                         <p>Match Percentage: {mentor.matchPercentage}%</p>
-                        <a href={mentor.fileUrl} target="_blank" rel="noreferrer">
-                                Contact Mentor
-                            </a>
+                        <button onClick={() => handleRequestMeeting(mentor)}>Request a Meeting</button>
                     </div>
                 ))
             ) : (
-                <div>
-                    <h4>No mentors match the selected skills.</h4>
+                <div className="mentor-card">
+                    <p>No mentors match the selected skills.</p>
                 </div>
             )}
         </>

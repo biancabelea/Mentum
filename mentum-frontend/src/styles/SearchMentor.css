@@ -159,22 +159,15 @@ h1 {
     font-weight: normal;
 }
 
-.mentor-card button {
-    background-color: var(--orange);
-    color: var(--white);
-    border: none;
-    border-radius: 5px;
-    padding: 10px;
+.mentor-card a {
     font-size: 14px;
-    cursor: pointer;
-    align-self: center; /* Center the button horizontally */
-    margin-top: 10px;
-    width: 80%; /* Make the button span 80% of the card width */
+    color: var(--orange);
+    text-decoration: none;
+    align-self: flex-end;
 }
 
-.mentor-card button:hover {
-    background-color: var(--dark-blue);
-    color: var(--white);
+.mentor-card a:hover {
+    text-decoration: underline;
 }
 
 /* Responsive Design */

@@ -83,7 +83,9 @@ const SearchMentor = () => {
                         <h3>{mentor.name}</h3>
                         <p>Matched Skills: {mentor.matchingSkills.join(', ')}</p>
                         <p>Match Percentage: {mentor.matchPercentage}%</p>
-                        <button onClick={() => handleRequestMeeting(mentor)}>Contact mentor</button>
+                        <a href={mentor.fileUrl} target="_blank" rel="noreferrer">
+                                Contact Mentor
+                            </a>
                     </div>
                 ))
             ) : (

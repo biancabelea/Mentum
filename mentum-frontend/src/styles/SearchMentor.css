@@ -11,3 +11,150 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+.searchContent {
+    background: rgb(20, 33, 61);
+    background: linear-gradient(180deg, rgba(20, 33, 61, 1) 38%, rgba(229, 229, 229, 1) 100%);
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    background-color: var(--dark-blue);
+    padding: 10px;
+    font-weight: bold;
+    color: var(--grey);
+    border-radius: 10px;
+    font-size: 40px;
+}
+
+/* Input container styling */
+.input-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    max-width: 400px;
+}
+
+/* Autocomplete input styling */
+.MuiAutocomplete-root {
+    width: 100%;
+    background-color: transparent; /* Ensure background blends with the page */
+    color: var(--white);
+}
+
+.MuiAutocomplete-inputRoot {
+    color: var(--white); /* Text color white */
+    border-radius: 8px; /* Smooth edges */
+    border: 1px solid var(--grey); /* Light border for outline */
+    padding: 8px; /* Comfortable padding */
+}
+
+/* Label ("Select Skills") */
+.MuiInputLabel-root {
+    color: var(--white); /* Label color */
+}
+
+.MuiInputLabel-root.Mui-focused {
+    color: var(--white); /* Label stays white when focused */
+}
+
+.MuiAutocomplete-clearIndicator {
+    color: var(--white); /* Clear icon (X) color */
+}
+
+.MuiAutocomplete-popupIndicator {
+    color: var(--white); /* Dropdown arrow color */
+}
+
+/* Selected skills styling */
+.MuiChip-root {
+    background-color: var(--dark-blue); /* Chip background */
+    color: var(--white); /* Chip text color */
+    font-size: 14px;
+}
+
+.MuiChip-deleteIcon {
+    color: var(--white); /* Delete (X) icon on chips */
+}
+
+/* Button Styling */
+.search-button {
+    background-color: var(--orange);
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+    max-width: 200px;
+    margin-top: 5px; /* Bring closer to the input */
+}
+
+.search-button:hover {
+    background-color: var(--dark-blue);
+    color: var(--white);
+}
+
+.search-button:focus {
+    outline: none;
+}
+
+/* Results Container */
+.results {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 20px;
+    width: 100%;
+}
+
+.mentor-card {
+    background-color: var(--white);
+    border: 1px solid var(--grey);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: calc(100% / 3 - 20px);
+    max-width: 300px;
+    min-width: 250px;
+    padding: 20px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.mentor-card h3 {
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--dark-blue);
+    margin-bottom: 10px;
+}
+
+.mentor-card p {
+    font-size: 14px;
+    color: var(--grey);
+    font-weight: normal;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .results {
+        justify-content: flex-start;
+    }
+
+    .mentor-card {
+        width: 100%;
+        max-width: 100%;
+    }
+}

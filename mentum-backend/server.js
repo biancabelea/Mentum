@@ -24,7 +24,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.use('/', authRoutes);
 app.use('/', resourceRoutes);
-app.use('/', mentorRoutes);
+app.use('/mentors', mentorRoutes);
 
 mongoose
     .connect(process.env.MONGO_URI)

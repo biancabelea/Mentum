@@ -5,7 +5,7 @@ const authMiddleware = require('../middleware/authMiddleware');
 const uploadMiddleware = require('../middleware/uploadMiddleware');
 const router = express.Router();
 
-// Add a resource
+//Add a resource
 router.post('/resources', authMiddleware, (req, res, next) => {
     uploadMiddleware.single('file')(req, res, (err) => {
         if (err instanceof multer.MulterError) {
@@ -55,18 +55,16 @@ router.post('/resources', authMiddleware, (req, res, next) => {
     }
 });
 
-// Get all resources
+//Get all resources
 router.get('/resources', async (req, res) => {
     try {
         const { search, page = 1, limit = 10 } = req.query;
-        const query = search
-            ? {
-                  $or: [
-                      { title: { $regex: search, $options: 'i' } },
-                      { description: { $regex: search, $options: 'i' } },
-                  ],
-              }
-            : {};
+        const query = search ? {
+            $or: [
+                { title: { $regex: search, $options: 'i' } },
+                { description: { $regex: search, $options: 'i' } },
+            ],
+        } : {};
 
         const resources = await Resource.find(query)
             .skip((page - 1) * limit)
@@ -82,26 +80,12 @@ router.get('/resources', async (req, res) => {
     }
 });
 
-// Get resources with uploader details
-router.get('/resources/uploader/:uploaderId', async (req, res) => {
-    try {
-        const uploaderId = req.params.uploaderId;
-        const uploader = await Resource.find({ uploadedBy: uploaderId }).populate('uploadedBy', 'name email');
-        if (!uploader) {
-            return res.status(404).json({ message: 'Uploader not found' });
-        }
-        res.status(200).json({ uploader });
-    } catch (error) {
-        console.error('Error fetching uploader:', error);
-        res.status(500).json({ message: 'Error fetching uploader', error: error.message });
-    }
-});
-
 // Get my resources
 router.get('/resources/my', authMiddleware, async (req, res) => {
     try {
         const userId = req.user._id;
-        const userResources = await Resource.find({ uploadedBy: userId }).populate('uploadedBy', 'name email');
+        const userResources = await Resource.find({ uploadedBy: userId })
+            .populate('uploadedBy', 'name email'); //join the users collection and retrieve the name and email fields based on uploadedBy
         res.status(200).json({ resources: userResources });
     } catch (error) {
         console.error('Error fetching user resources:', error);

@@ -35,9 +35,6 @@ function Homepage() {
                 <div className="buttons">
                     {loggedIn ? (
                         <nav>
-                            <a href="/profile" className="profile-button">
-                             <button>My Profile</button>
-                            </a>
                             <a href="/mentors-search" className="mentors-button">
                                 <button>Search for Mentors</button>
                             </a>

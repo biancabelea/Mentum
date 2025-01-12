@@ -97,12 +97,6 @@
     font-style: italic;
 }
 
-.uploaded-by:hover {
-    color: var(--grey);
-    background: none;
-}
-
-
 .delete-button {
     background: none;
     border: none;

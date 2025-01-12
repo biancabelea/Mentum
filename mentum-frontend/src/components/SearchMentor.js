@@ -89,8 +89,8 @@ const SearchMentor = () => {
                     </div>
                 ))
             ) : (
-                <div className="mentor-card">
-                    <p>No mentors match the selected skills.</p>
+                <div>
+                    <h4>No mentors match the selected skills.</h4>
                 </div>
             )}
         </>

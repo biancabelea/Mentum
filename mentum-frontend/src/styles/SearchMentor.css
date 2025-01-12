@@ -57,10 +57,6 @@ h1 {
     color: var(--white); /* Label color */
 }
 
-.searchContent .MuiInputLabel-root.Mui-focused {
-    color: var(--white); /* Label remains white when focused */
-}
-
 .searchContent .MuiInputLabel-root {
     color: var(--white) !important; /* Force label color to white */
 }

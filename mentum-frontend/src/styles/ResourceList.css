@@ -116,7 +116,7 @@
 
 .add-button {
     position: fixed;
-    top: 20px;
+    top: 80px;
     right: 20px;
     background-color: var(--orange);
     color: var(--white);

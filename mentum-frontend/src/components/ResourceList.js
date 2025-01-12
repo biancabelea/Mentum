@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import '../styles/ResourceList.css';
+import { useNavigate } from 'react-router-dom';
 
 function ResourceList() {
     const [resources, setResources] = useState([]);
     const [search, setSearch] = useState('');
     const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
 
     const fetchResources = async () => {
         setLoading(true);
@@ -34,8 +36,22 @@ function ResourceList() {
         window.location.href = '/resources/my';
     };
 
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        navigate('/');
+    };
+
     return (
-        <div className="resources-page">
+        <div>
+            <nav className="navbar">
+                <div>
+                    <button onClick={handleLogout} className="nav-button">
+                        Logout
+                    </button>
+                </div>
+            </nav>
+            <div className="resources-page">
+            
             <div className="resources-title">All Resources</div>
 
             <input
@@ -72,6 +88,7 @@ function ResourceList() {
             <button className="add-button" onClick={navigateToAddResource}>
                 +
             </button>
+            </div>
         </div>
     );
 }

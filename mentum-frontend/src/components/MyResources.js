@@ -3,10 +3,12 @@ import axios from 'axios';
 import '../styles/ResourceList.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from 'react-router-dom';
 
 function MyResources() {
     const [resources, setResources] = useState([]);
     const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
 
     const fetchMyResources = async () => {
         setLoading(true);
@@ -58,39 +60,53 @@ function MyResources() {
         }
     };
 
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        navigate('/');
+    };
+
     return (
-        <div className="resources-page">
-            <div className="resources-title">My Resources</div>
-    
-            {loading ? (
-                <p className="loading-message">Loading your resources...</p>
-            ) : resources.length === 0 ? (
-                <p className="no-resources-message">You haven't uploaded any resources yet!</p>
-            ) : (
-                <div className="body-cards">
-                    {resources.map((resource) => (
-                        <div className="card" key={resource._id}>
-                            <h3>{resource.title}</h3>
-                            <p>{resource.description}</p>
-                            <p className="uploaded-by">
-                                Uploaded by: {resource.uploadedBy?.name || 'Unknown'}
-                            </p>
-                            <a href={resource.fileUrl} target="_blank" rel="noreferrer">
-                                View Resource
-                            </a>
-                            <button
-                                className="delete-button"
-                                onClick={() => handleDelete(resource._id)}
-                            >
-                                <FontAwesomeIcon icon={faTrash} />
-                            </button>
-                        </div>
-                    ))}
+        <div>
+            <nav className="navbar">
+                <div>
+                    <button onClick={handleLogout} className="nav-button">
+                        Logout
+                    </button>
                 </div>
-            )}
-            <button className="add-button" onClick={navigateToAddResource}>
-                +
-            </button>
+            </nav>
+            <div className="resources-page">
+                <div className="resources-title">My Resources</div>
+        
+                {loading ? (
+                    <p className="loading-message">Loading your resources...</p>
+                ) : resources.length === 0 ? (
+                    <p className="no-resources-message">You haven't uploaded any resources yet!</p>
+                ) : (
+                    <div className="body-cards">
+                        {resources.map((resource) => (
+                            <div className="card" key={resource._id}>
+                                <h3>{resource.title}</h3>
+                                <p>{resource.description}</p>
+                                <p className="uploaded-by">
+                                    Uploaded by: {resource.uploadedBy?.name || 'Unknown'}
+                                </p>
+                                <a href={resource.fileUrl} target="_blank" rel="noreferrer">
+                                    View Resource
+                                </a>
+                                <button
+                                    className="delete-button"
+                                    onClick={() => handleDelete(resource._id)}
+                                >
+                                    <FontAwesomeIcon icon={faTrash} />
+                                </button>
+                            </div>
+                        ))}
+                    </div>
+                )}
+                <button className="add-button" onClick={navigateToAddResource}>
+                    +
+                </button>
+            </div>
         </div>
     );
 }

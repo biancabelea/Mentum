@@ -74,21 +74,13 @@ function ResourceList() {
                 <div className="body-cards">
                     {resources.map((resource) => (
                         <div className="card" key={resource._id}>
-                        <h3>{resource.title}</h3>
-                        <p>{resource.description}</p>
-                        <p>
-                            <a
-                                href={`/user-profile/${resource.uploadedBy._id}`}
-                                className="uploaded-by"
-                            >
-                                Uploaded by: {resource.uploadedBy.name}
+                            <h3>{resource.title}</h3>
+                            <p>{resource.description}</p>
+                            <p className="uploaded-by">Uploaded by: {resource.uploadedBy?.name || 'Unknown'}</p>
+                            <a href={resource.fileUrl} target="_blank" rel="noreferrer">
+                                View Resource
                             </a>
-                        </p>
-                        <a href={resource.fileUrl} target="_blank" rel="noopener noreferrer">
-                            View Resource
-                        </a>
-                    </div>
-                    
+                        </div>
                     ))}
                 </div>
             )}

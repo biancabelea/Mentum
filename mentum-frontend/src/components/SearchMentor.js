@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
@@ -18,6 +19,7 @@ const SearchMentor = () => {
   const [matchingMentors, setMatchingMentors] = useState([]);
   const [loading, setLoading] = useState(false);
   const [searched, setSearched] = useState(false); // Tracks if the search button has been pressed
+  const navigate = useNavigate();
 
   const handleSkillsChange = (event, newValue) => {
     setUserSkills(newValue);
@@ -46,58 +48,84 @@ const SearchMentor = () => {
     }
   };
 
-  const handleRequestMeeting = (mentor) => {
-    console.log(`Requesting a meeting with ${mentor.name}`);
-    // Add your logic here to handle the meeting request
-    // For example: open a modal, redirect to a new page, etc.
+  const handleContactMentor = (mentor) => {
+    navigate('/contact-mentor', {
+      state: {
+        mentorName: mentor.name,
+        mentorEmail: mentor.email,
+        skills: mentor.matchingSkills,
+      },
+    });
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    navigate('/');
+};
+
   return (
-    <div className="searchContent">
-      <h1>Search for Mentors</h1>
-      <div className="input-container">
-        <Autocomplete
-          multiple
-          id="skills-autocomplete"
-          value={userSkills}
-          onChange={handleSkillsChange}
-          options={skills.sort()}
-          renderTags={(tagValue, getTagProps) =>
-            tagValue.map((option, index) => {
-              const tagProps = getTagProps({ index });
-              return <Chip key={option} label={option} {...tagProps} />;
-            })
-          }
-          renderInput={(params) => <TextField {...params} label="Select Skills" />}
-        />
-        <button onClick={handleSearch} disabled={loading} className="search-button">
-          {loading ? 'Searching...' : 'Search'}
-        </button>
-      </div>
-      <div className="results">
-    {searched && (
-        <>
-            {matchingMentors.length > 0 ? (
-                matchingMentors.map((mentor, index) => (
-                    <div key={index} className="mentor-card">
-                        <h3>
+    <div>
+      <nav className="navbar">
+        <nav>
+          <button onClick={handleLogout} className="nav-button">
+              Logout
+          </button>
+        </nav>
+      </nav>
+      <div className="searchContent">
+        <h1>Search for Mentors</h1>
+        <div className="input-container">
+          <Autocomplete
+            multiple
+            id="skills-autocomplete"
+            value={userSkills}
+            onChange={handleSkillsChange}
+            options={skills.sort()}
+            renderTags={(tagValue, getTagProps) =>
+              tagValue.map((option, index) => {
+                const tagProps = getTagProps({ index });
+                return <Chip key={option} label={option} {...tagProps} />;
+              })
+            }
+            renderInput={(params) => <TextField {...params} label="Select Skills" />}
+          />
+          <button onClick={handleSearch} disabled={loading} className="search-button">
+            {loading ? 'Searching...' : 'Search'}
+          </button>
+        </div>
+        <div className="results">
+        {searched && (
+          <>
+              {matchingMentors.length > 0 && matchingMentors[0].name !== '' ? (
+                  matchingMentors.map((mentor, index) => (
+                      <div key={index} className="mentor-card">
+                          <h3>
                             <a href={`/user-profile/${mentor._id}`} className="mentor-link">
-                                {mentor.name}
+                              {mentor.name}
                             </a>
-                        </h3>
-                        <p>Matched Skills: {mentor.matchingSkills.join(', ')}</p>
-                        <p>Match Percentage: {mentor.matchPercentage}%</p>
-                        <button onClick={() => handleRequestMeeting(mentor)}>Request a Meeting</button>
-                    </div>
-                ))
-            ) : (
-                <div className="mentor-card">
-                    <p>No mentors match the selected skills.</p>
-                </div>
-            )}
-        </>
-    )}
-</div>
+                          </h3>
+                          <p>Matched Skills: {mentor.matchingSkills.join(', ')}</p>
+                          <p>Match Percentage: {mentor.matchPercentage}%</p>
+                          <a
+                            href="#"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              handleContactMentor(mentor);
+                            }}
+                          >
+                            Contact Mentor
+                          </a>
+                      </div>
+                  ))
+              ) : (
+                  <div>
+                      <h4>No mentors match the selected skills.</h4>
+                  </div>
+              )}
+          </>
+      )}
+  </div>
+      </div>
     </div>
   );
 };

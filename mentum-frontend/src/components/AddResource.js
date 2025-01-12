@@ -14,6 +14,11 @@ function AddResource() {
     const [message, setMessage] = useState('');
     const navigate = useNavigate();
 
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        navigate('/');
+    };
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData((prev) => ({ ...prev, [name]: value }));
@@ -58,77 +63,39 @@ function AddResource() {
     };    
 
     return (
-        <div className="body-resources">
-            <form onSubmit={handleSubmit}>
-                <h2 className="title">Add Resource</h2>
-                {message && <p>{message}</p>}
-
-                <label htmlFor="title">Title:</label>
-                <input
-                    type="text"
-                    id="title"
-                    name="title"
-                    placeholder="Resource Title"
-                    value={formData.title}
-                    onChange={handleChange}
-                    required
-                />
-
-                <label htmlFor="description">Description:</label>
-                <textarea
-                    id="description"
-                    name="description"
-                    placeholder="Resource Description"
-                    value={formData.description}
-                    onChange={handleChange}
-                    required
-                ></textarea>
-
-                <div className="radio-group-container">
-                    <div className="radio-group">
-                        <div className="radio-option">
-                            <input
-                                type="radio"
-                                id="upload-file"
-                                name="uploadOption"
-                                value="file"
-                                checked={useFileUpload}
-                                onChange={() => setUseFileUpload(true)}
-                            />
-                            <label htmlFor="upload-file">Upload File</label>
-                        </div>
-
-                        <div className="radio-option">
-                            <input
-                                type="radio"
-                                id="file-url"
-                                name="uploadOption"
-                                value="url"
-                                checked={!useFileUpload}
-                                onChange={() => setUseFileUpload(false)}
-                            />
-                            <label htmlFor="file-url">Provide File URL</label>
-                        </div>
-                    </div>
+        <div>
+          <nav className="navbar">
+            <nav>
+                <button onClick={handleLogout} className="nav-button">
+                    Logout
+                </button>
+            </nav>
+          </nav>
+          <div className="body-resources">
+            <form>
+              <div className="title">Add Resource</div>
+              <label>Title:</label>
+              <input type="text" placeholder="Resource Title" />
+              <label>Description:</label>
+              <textarea placeholder="Resource Description"></textarea>
+              <div className="radio-group-container">
+                <div className="radio-group">
+                  <div className="radio-option">
+                    <input type="radio" id="upload" name="fileOption" value="upload" />
+                    <label htmlFor="upload">Upload File</label>
+                  </div>
+                  <div className="radio-option">
+                    <input type="radio" id="url" name="fileOption" value="url" />
+                    <label htmlFor="url">Provide File URL</label>
+                  </div>
                 </div>
-
-                {useFileUpload ? (
-                    <input type="file" onChange={handleFileChange} accept=".pdf" required />
-                ) : (
-                    <input
-                        type="url"
-                        name="fileUrl"
-                        placeholder="File URL"
-                        value={formData.fileUrl}
-                        onChange={handleChange}
-                        required
-                    />
-                )}
-
-                <button type="submit">Add Resource</button>
+              </div>
+              <input type="text" placeholder="File URL" />
+              <button type="submit">Add Resource</button>
             </form>
+          </div>
         </div>
-    );
+      );
 }
 
 export default AddResource;

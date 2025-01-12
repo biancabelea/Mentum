@@ -26,6 +26,7 @@ function Login() {
             console.log('Login successful:', response.data);
 
             localStorage.setItem('token', response.data.token);
+            localStorage.setItem('userEmail', response.data.user.email);
 
             navigate('/');
         } catch (error) {

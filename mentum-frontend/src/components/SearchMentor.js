@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
@@ -18,6 +19,7 @@ const SearchMentor = () => {
   const [matchingMentors, setMatchingMentors] = useState([]);
   const [loading, setLoading] = useState(false);
   const [searched, setSearched] = useState(false); // Tracks if the search button has been pressed
+  const navigate = useNavigate();
 
   const handleSkillsChange = (event, newValue) => {
     setUserSkills(newValue);
@@ -46,10 +48,14 @@ const SearchMentor = () => {
     }
   };
 
-  const handleRequestMeeting = (mentor) => {
-    console.log(`Requesting a meeting with ${mentor.name}`);
-    // Add your logic here to handle the meeting request
-    // For example: open a modal, redirect to a new page, etc.
+  const handleContactMentor = (mentor) => {
+    navigate('/contact-mentor', {
+      state: {
+        mentorName: mentor.name,
+        mentorEmail: mentor.email,
+        skills: mentor.matchingSkills,
+      },
+    });
   };
 
   return (
@@ -83,9 +89,15 @@ const SearchMentor = () => {
                         <h3>{mentor.name}</h3>
                         <p>Matched Skills: {mentor.matchingSkills.join(', ')}</p>
                         <p>Match Percentage: {mentor.matchPercentage}%</p>
-                        <a href={mentor.fileUrl} target="_blank" rel="noreferrer">
-                                Contact Mentor
-                            </a>
+                        <a
+                          href="#"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            handleContactMentor(mentor);
+                          }}
+                        >
+                          Contact Mentor
+                        </a>
                     </div>
                 ))
             ) : (

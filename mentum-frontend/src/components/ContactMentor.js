@@ -1,7 +1,8 @@
 import React, { useState } from "react";
+import { useLocation } from 'react-router-dom';
 import emailjs from "emailjs-com";
 
-const ContactMentor = ({ mentorName, mentorEmail="bianca.belea00@gmail.com", skills=['.net','oop'] }) => {
+const ContactMentor = () => {
     const [formData, setFormData] = useState({
         subject: "",
         message: "",
@@ -9,7 +10,10 @@ const ContactMentor = ({ mentorName, mentorEmail="bianca.belea00@gmail.com", ski
     const [status, setStatus] = useState("");
     const [isSending, setIsSending] = useState(false);
     const userEmail = localStorage.getItem("userEmail");
-    const skillsString = skills.join(', ');
+
+    const location = useLocation();
+    const { mentorName, mentorEmail, skills } = location.state || {};
+    const skillsString = Array.isArray(skills) ? skills.join(', ') : '';
 
     const handleChange = (e) => {
         const { name, value } = e.target;

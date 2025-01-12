@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { useLocation, useNavigate } from 'react-router-dom';
 import emailjs from "emailjs-com";
+import '../styles/ContactMentor.css';
 
-const ContactMentor = ({ mentorName, mentorEmail="bianca.belea00@gmail.com", skills=['.net','oop'] }) => {
+const ContactMentor = () => {
     const [formData, setFormData] = useState({
         subject: "",
         message: "",
@@ -9,11 +11,20 @@ const ContactMentor = ({ mentorName, mentorEmail="bianca.belea00@gmail.com", ski
     const [status, setStatus] = useState("");
     const [isSending, setIsSending] = useState(false);
     const userEmail = localStorage.getItem("userEmail");
-    const skillsString = skills.join(', ');
+
+    const location = useLocation();
+    const { mentorName, mentorEmail, skills } = location.state || {};
+    const skillsString = Array.isArray(skills) ? skills.join(', ') : '';
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
+    };
+
+    const navigate = useNavigate();
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        navigate('/');
     };
 
     const handleSubmit = (e) => {
@@ -48,18 +59,28 @@ const ContactMentor = ({ mentorName, mentorEmail="bianca.belea00@gmail.com", ski
 
     return (
         <div>
-            <h3>Contact {mentorName}</h3>
-            <form onSubmit={handleSubmit}>
-                <textarea
-                    name="message"
-                    placeholder="Write your message here..."
-                    value={formData.message}
-                    onChange={handleChange}
-                    required
-                ></textarea>
-                <button type="submit">Send Message</button>
-            </form>
-            {status && <p>{status.message}</p>}
+            <nav className="navbar">
+            <nav>
+                <button onClick={handleLogout} className="nav-button">
+                    Logout
+                </button>
+            </nav>
+          </nav>
+            <div className="contact-content">
+                <h1>Contact {mentorName}</h1>
+                <form onSubmit={handleSubmit}>
+                    <textarea
+                        name="message"
+                        placeholder="Write your message here..."
+                        value={formData.message}
+                        onChange={handleChange}
+                        required
+                    ></textarea>
+                    <button type="submit" disabled={isSending}>
+                        {isSending ? "Sending..." : "Send Message"}</button>
+                </form>
+                {status && <p>{status.message}</p>}
+            </div>
         </div>
     );
 };

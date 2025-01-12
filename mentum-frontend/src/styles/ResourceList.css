@@ -23,14 +23,12 @@
 }
 
 .resources-title {
-    background-color: var(--orange);
-    width: 80%;
-    border-radius: 8px;
-    text-align: center;
-    font-size: 24px;
-    margin: 0 auto 20px auto;
+    background-color: var(--dark-blue);
     padding: 10px;
-    color: var(--white);
+    font-weight: bold;
+    color: var(--grey);
+    border-radius: 10px;
+    font-size: 40px;
 }
 
 .search-input {
@@ -156,6 +154,7 @@
     font-size: 16px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    align-self: center;
     width: 30%;
 }
 

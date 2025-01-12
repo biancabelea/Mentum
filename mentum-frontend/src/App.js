@@ -6,6 +6,7 @@ import Login from './components/Login';
 import AddResource from './components/AddResource';
 import ResourceList from './components/ResourceList';
 import MyResources from './components/MyResources';
+import ContactMentor from './components/ContactMentor';
 import SearchMentor from './components/SearchMentor';
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
             <Route path="/add-resource" element={<AddResource />} />
             <Route path="/resources" element={<ResourceList />} />
             <Route path="/resources/my" element={<MyResources />} />
+            <Route path="/contact-mentor" element={<ContactMentor />} />
             <Route path="/mentors-search" element={<SearchMentor />} />
         </Routes>
     );

@@ -1,0 +1,103 @@
+import React, { useState } from 'react';
+import axios from 'axios';
+import Autocomplete from '@mui/material/Autocomplete';
+import TextField from '@mui/material/TextField';
+import Chip from '@mui/material/Chip';
+import '../styles/SearchMentor.css';
+
+const skills = [
+  'React', 'NodeJS', '.NET', 'Java', 'Python', 'C++', 'JavaScript', 'Ruby', 'Swift',
+  'HTML', 'CSS', 'Angular', 'Vue', 'Django', 'REST API', 'Kotlin', 'Git', 'Agile',
+  'SQL', 'NoSQL', 'Docker', 'Data structures', 'Cybersecurity', 'Networking',
+  'Unit testing', 'Physics', 'Computer programming', 'OOP', 'Mechanics',
+  'Statistics', 'Digital logic',
+];
+
+const SearchMentor = () => {
+  const [userSkills, setUserSkills] = useState([]);
+  const [matchingMentors, setMatchingMentors] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [searched, setSearched] = useState(false); // Tracks if the search button has been pressed
+
+  const handleSkillsChange = (event, newValue) => {
+    setUserSkills(newValue);
+  };
+
+  const handleSearch = async () => {
+    setLoading(true);
+    setSearched(true); // Mark that the search button has been pressed
+
+    try {
+      console.log('Sending request to API with:', userSkills);
+      const response = await axios.post('http://localhost:5000/mentors/search', { skills: userSkills });
+      console.log('API Response:', response.data);
+
+      setMatchingMentors(response.data); // Save the response
+    } catch (error) {
+      console.error('Error fetching mentors:', error);
+      if (error.response && error.response.status === 404) {
+        // When no mentors match, set a special state with a message
+        setMatchingMentors([{ name: '', matchingSkills: ['No mentors match the selected skills.'] }]);
+      } else {
+        setMatchingMentors([{ name: '', matchingSkills: ['An error occurred while fetching mentors.'] }]);
+      }
+    } finally {
+      setLoading(false); // Hide loading indicator after the request is done
+    }
+  };
+
+  const handleRequestMeeting = (mentor) => {
+    console.log(`Requesting a meeting with ${mentor.name}`);
+    // Add your logic here to handle the meeting request
+    // For example: open a modal, redirect to a new page, etc.
+  };
+
+  return (
+    <div className="searchContent">
+      <h1>Search for Mentors</h1>
+      <div className="input-container">
+        <Autocomplete
+          multiple
+          id="skills-autocomplete"
+          value={userSkills}
+          onChange={handleSkillsChange}
+          options={skills.sort()}
+          renderTags={(tagValue, getTagProps) =>
+            tagValue.map((option, index) => {
+              const tagProps = getTagProps({ index });
+              return <Chip key={option} label={option} {...tagProps} />;
+            })
+          }
+          renderInput={(params) => <TextField {...params} label="Select Skills" />}
+        />
+        <button onClick={handleSearch} disabled={loading} className="search-button">
+          {loading ? 'Searching...' : 'Search'}
+        </button>
+      </div>
+      <div className="results">
+    {searched && (
+        <>
+            {matchingMentors.length > 0 && matchingMentors[0].name !== '' ? (
+                matchingMentors.map((mentor, index) => (
+                    <div key={index} className="mentor-card">
+                        <h3>{mentor.name}</h3>
+                        <p>Matched Skills: {mentor.matchingSkills.join(', ')}</p>
+                        <p>Match Percentage: {mentor.matchPercentage}%</p>
+                        <a href={mentor.fileUrl} target="_blank" rel="noreferrer">
+                                Contact Mentor
+                            </a>
+                    </div>
+                ))
+            ) : (
+                <div>
+                    <h4>No mentors match the selected skills.</h4>
+                </div>
+            )}
+        </>
+    )}
+</div>
+    </div>
+  );
+};
+
+export default SearchMentor;

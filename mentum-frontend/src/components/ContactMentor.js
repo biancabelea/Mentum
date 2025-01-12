@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import emailjs from "emailjs-com";
+import '../styles/ContactMentor.css';
 
 const ContactMentor = () => {
     const [formData, setFormData] = useState({
@@ -18,6 +19,12 @@ const ContactMentor = () => {
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
+    };
+
+    const navigate = useNavigate();
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        navigate('/');
     };
 
     const handleSubmit = (e) => {
@@ -52,18 +59,28 @@ const ContactMentor = () => {
 
     return (
         <div>
-            <h3>Contact {mentorName}</h3>
-            <form onSubmit={handleSubmit}>
-                <textarea
-                    name="message"
-                    placeholder="Write your message here..."
-                    value={formData.message}
-                    onChange={handleChange}
-                    required
-                ></textarea>
-                <button type="submit">Send Message</button>
-            </form>
-            {status && <p>{status.message}</p>}
+            <nav className="navbar">
+            <nav>
+                <button onClick={handleLogout} className="nav-button">
+                    Logout
+                </button>
+            </nav>
+          </nav>
+            <div className="contact-content">
+                <h1>Contact {mentorName}</h1>
+                <form onSubmit={handleSubmit}>
+                    <textarea
+                        name="message"
+                        placeholder="Write your message here..."
+                        value={formData.message}
+                        onChange={handleChange}
+                        required
+                    ></textarea>
+                    <button type="submit" disabled={isSending}>
+                        {isSending ? "Sending..." : "Send Message"}</button>
+                </form>
+                {status && <p>{status.message}</p>}
+            </div>
         </div>
     );
 };

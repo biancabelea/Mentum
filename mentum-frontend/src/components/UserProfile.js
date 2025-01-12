@@ -31,6 +31,7 @@ const UserProfile = () => {
             <div className="profile-page">
                 <h1>{userData.name}'s Profile</h1>
                 <p><strong>Email:</strong> {userData.email}</p>
+                <p><strong>Role:</strong> {userData.userRole}</p>
                 <p><strong>University Year:</strong> {userData.userYear}</p>
                 {userData.userRole === 'Mentor' && (
                     <p><strong>Skills:</strong> {userData.userSkills.join(', ')}</p>

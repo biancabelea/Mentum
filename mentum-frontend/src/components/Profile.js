@@ -34,6 +34,7 @@ const Profile = () => {
         <div className="profile-page">
             <h1>{userData.name}'s Profile</h1>
             <p><strong>Email:</strong> {userData.email}</p>
+            <p><strong>Role:</strong> {userData.userRole}</p>
             <p><strong>University Year:</strong> {userData.userYear}</p>
 
             {/* Display skills only if the user is a mentor */}

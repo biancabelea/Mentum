@@ -58,56 +58,70 @@ const SearchMentor = () => {
     });
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    navigate('/');
+};
+
   return (
-    <div className="searchContent">
-      <h1>Search for Mentors</h1>
-      <div className="input-container">
-        <Autocomplete
-          multiple
-          id="skills-autocomplete"
-          value={userSkills}
-          onChange={handleSkillsChange}
-          options={skills.sort()}
-          renderTags={(tagValue, getTagProps) =>
-            tagValue.map((option, index) => {
-              const tagProps = getTagProps({ index });
-              return <Chip key={option} label={option} {...tagProps} />;
-            })
-          }
-          renderInput={(params) => <TextField {...params} label="Select Skills" />}
-        />
-        <button onClick={handleSearch} disabled={loading} className="search-button">
-          {loading ? 'Searching...' : 'Search'}
-        </button>
+    <div>
+      <nav className="navbar">
+        <nav>
+          <button onClick={handleLogout} className="nav-button">
+              Logout
+          </button>
+        </nav>
+      </nav>
+      <div className="searchContent">
+        <h1>Search for Mentors</h1>
+        <div className="input-container">
+          <Autocomplete
+            multiple
+            id="skills-autocomplete"
+            value={userSkills}
+            onChange={handleSkillsChange}
+            options={skills.sort()}
+            renderTags={(tagValue, getTagProps) =>
+              tagValue.map((option, index) => {
+                const tagProps = getTagProps({ index });
+                return <Chip key={option} label={option} {...tagProps} />;
+              })
+            }
+            renderInput={(params) => <TextField {...params} label="Select Skills" />}
+          />
+          <button onClick={handleSearch} disabled={loading} className="search-button">
+            {loading ? 'Searching...' : 'Search'}
+          </button>
+        </div>
+        <div className="results">
+        {searched && (
+          <>
+              {matchingMentors.length > 0 && matchingMentors[0].name !== '' ? (
+                  matchingMentors.map((mentor, index) => (
+                      <div key={index} className="mentor-card">
+                          <h3>{mentor.name}</h3>
+                          <p>Matched Skills: {mentor.matchingSkills.join(', ')}</p>
+                          <p>Match Percentage: {mentor.matchPercentage}%</p>
+                          <a
+                            href="#"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              handleContactMentor(mentor);
+                            }}
+                          >
+                            Contact Mentor
+                          </a>
+                      </div>
+                  ))
+              ) : (
+                  <div>
+                      <h4>No mentors match the selected skills.</h4>
+                  </div>
+              )}
+          </>
+      )}
+  </div>
       </div>
-      <div className="results">
-    {searched && (
-        <>
-            {matchingMentors.length > 0 && matchingMentors[0].name !== '' ? (
-                matchingMentors.map((mentor, index) => (
-                    <div key={index} className="mentor-card">
-                        <h3>{mentor.name}</h3>
-                        <p>Matched Skills: {mentor.matchingSkills.join(', ')}</p>
-                        <p>Match Percentage: {mentor.matchPercentage}%</p>
-                        <a
-                          href="#"
-                          onClick={(e) => {
-                            e.preventDefault();
-                            handleContactMentor(mentor);
-                          }}
-                        >
-                          Contact Mentor
-                        </a>
-                    </div>
-                ))
-            ) : (
-                <div>
-                    <h4>No mentors match the selected skills.</h4>
-                </div>
-            )}
-        </>
-    )}
-</div>
     </div>
   );
 };

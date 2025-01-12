@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router(); // Initialize the router
 const User = require('../models/User'); // Adjust the path to your User model
+const Resource = require('../models/Resource');
 const validateSkillsMiddleware = require('../middleware/validateSkillsMiddleware'); // Adjust the path to your middleware
 
 // Mentor search route
@@ -39,6 +40,5 @@ router.post('/search', validateSkillsMiddleware, async (req, res) => {
         res.status(500).json({ message: 'Internal Server Error' });
     }
 });
-
 // Export the router
 module.exports = router;

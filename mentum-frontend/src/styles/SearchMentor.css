@@ -163,7 +163,8 @@ h1 {
 }
 
 .mentor-card a:hover {
-    text-decoration: underline;
+    color: var(--dark-blue);
+    background: none;
 }
 
 /* Responsive Design */

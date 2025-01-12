@@ -8,6 +8,8 @@ import ResourceList from './components/ResourceList';
 import MyResources from './components/MyResources';
 import ContactMentor from './components/ContactMentor';
 import SearchMentor from './components/SearchMentor';
+import Profile from './components/Profile';
+import UserProfile from './components/UserProfile';
 
 function App() {
     return (
@@ -20,6 +22,8 @@ function App() {
             <Route path="/resources/my" element={<MyResources />} />
             <Route path="/contact-mentor" element={<ContactMentor />} />
             <Route path="/mentors-search" element={<SearchMentor />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/user-profile/:id" element={<UserProfile />} /> 
         </Routes>
     );
 }

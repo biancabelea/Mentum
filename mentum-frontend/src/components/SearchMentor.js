@@ -75,24 +75,25 @@ const SearchMentor = () => {
         </button>
       </div>
       <div className="results">
-        {searched && (
-          <>
+    {searched && (
+        <>
             {matchingMentors.length > 0 && matchingMentors[0].name !== '' ? (
-              matchingMentors.map((mentor, index) => (
-                <div key={index} className="mentor-card">
-                  <h3>{mentor.name}</h3>
-                  <p>Matched Skills: {mentor.matchingSkills.join(', ')}</p>
-                  <button onClick={() => handleRequestMeeting(mentor)}>Request a Meeting</button>
-                </div>
-              ))
+                matchingMentors.map((mentor, index) => (
+                    <div key={index} className="mentor-card">
+                        <h3>{mentor.name}</h3>
+                        <p>Matched Skills: {mentor.matchingSkills.join(', ')}</p>
+                        <p>Match Percentage: {mentor.matchPercentage}%</p>
+                        <button onClick={() => handleRequestMeeting(mentor)}>Contact mentor</button>
+                    </div>
+                ))
             ) : (
-              <div className="mentor-card">
-                <p>No mentors match the selected skills.</p>
-              </div>
+                <div className="mentor-card">
+                    <p>No mentors match the selected skills.</p>
+                </div>
             )}
-          </>
-        )}
-      </div>
+        </>
+    )}
+</div>
     </div>
   );
 };

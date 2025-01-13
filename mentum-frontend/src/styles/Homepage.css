@@ -79,6 +79,14 @@ button:hover{
     flex-direction: column;
     align-items: center;
 }
+/* Adjust text style in the homepage */
+.homeContent p {
+    color: var(--white); /* Change to gray or adjust to --white if needed */
+    font-size: 48px; /* Make the text bigger */
+    font-weight: bold; /* Add emphasis */
+    text-align: center; /* Center the text */
+    margin-bottom: 20px; /* Add space below the text */
+}
 
 p {
     background-color: var(--dark-blue);

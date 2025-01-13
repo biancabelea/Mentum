@@ -77,14 +77,13 @@ function ResourceList() {
                         <h3>{resource.title}</h3>
                         <p>{resource.description}</p>
                         <p>
-                            <a
+                            <a className="uploaded-by"
                                 href={`/user-profile/${resource.uploadedBy._id}`}
-                                className="uploaded-by"
                             >
                                 Uploaded by: {resource.uploadedBy.name}
                             </a>
                         </p>
-                        <a href={resource.fileUrl} target="_blank" rel="noopener noreferrer">
+                        <a className="view-resource" href={resource.fileUrl} target="_blank" rel="noopener noreferrer">
                             View Resource
                         </a>
                     </div>

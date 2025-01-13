@@ -100,13 +100,13 @@ const SearchMentor = () => {
                   matchingMentors.map((mentor, index) => (
                       <div key={index} className="mentor-card">
                           <h3>
-                            <a href={`/user-profile/${mentor._id}`} className="mentor-link">
+                            <a className="mentor-link" href={`/user-profile/${mentor._id}`} >
                               {mentor.name}
                             </a>
                           </h3>
                           <p>Matched Skills: {mentor.matchingSkills.join(', ')}</p>
                           <p>Match Percentage: {mentor.matchPercentage}%</p>
-                          <a
+                          <a className="contact-mentor"
                             href="#"
                             onClick={(e) => {
                               e.preventDefault();

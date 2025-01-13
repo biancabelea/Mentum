@@ -45,16 +45,16 @@ const Profile = () => {
             <h2>Uploaded Resources</h2>
             {userData.resources.length > 0 ? (
                 <ul className="resources-list">
-                    {userData.resources.map((resource, index) => (
-                        <li key={index}>
-                            <h3>{resource.title}</h3>
-                            <p>{resource.description}</p>
-                            <a href={resource.fileUrl} target="_blank" rel="noopener noreferrer">
-                                View Resource
-                            </a>
-                        </li>
-                    ))}
-                </ul>
+                {userData.resources.map((resource, index) => (
+                    <li key={index}>
+                        <h3>{resource.title}</h3>
+                        <p>{resource.description}</p>
+                        <a href={resource.fileUrl} target="_blank" rel="noopener noreferrer">
+                            View Resource
+                        </a>
+                    </li>
+                ))}
+            </ul>            
             ) : (
                 <p>No uploaded resources.</p>
             )}

@@ -19,6 +19,7 @@
     justify-content: center;
     background-color: var(--dark-blue);
     height: 615px;
+    background: linear-gradient(180deg, rgba(20, 33, 61, 1) 38%, rgba(229, 229, 229, 1) 100%);
 }
 
 form {

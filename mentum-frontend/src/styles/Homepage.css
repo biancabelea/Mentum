@@ -68,6 +68,7 @@ button:hover{
 }
 
 .homeContent{
+    background: rgb(20,33,61);
     background: linear-gradient(180deg, rgba(20,33,61,1) 38%, rgba(229,229,229,1) 100%);
     position: absolute;
     text-align: center;
@@ -88,6 +89,7 @@ button:hover{
 }
 
 p {
+    background-color: var(--dark-blue);
     padding: 10px 10px 10px 10px;
     font-weight: bold;
     color: var(--grey);

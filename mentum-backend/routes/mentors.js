@@ -1,9 +1,8 @@
 const express = require('express');
-const router = express.Router(); // Initialize the router
-const User = require('../models/User'); // Adjust the path to your User model
-const validateSkillsMiddleware = require('../middleware/validateSkillsMiddleware'); // Adjust the path to your middleware
+const router = express.Router();
+const User = require('../models/User');
+const validateSkillsMiddleware = require('../middleware/validateSkillsMiddleware');
 
-// Mentor search route
 router.post('/search', validateSkillsMiddleware, async (req, res) => {
     try {
         const { skills } = req.body;
@@ -12,10 +11,8 @@ router.post('/search', validateSkillsMiddleware, async (req, res) => {
             return res.status(400).json({ message: 'Invalid or missing skills array.' });
         }
 
-        // Fetch all mentors
         const mentors = await User.find({ userRole: 'Mentor' });
 
-        // Calculate matches and filter mentors
         const matchingMentors = mentors
             .map((mentor) => {
                 const matchingSkills = mentor.userSkills.filter((skill) => skills.includes(skill));
@@ -24,10 +21,10 @@ router.post('/search', validateSkillsMiddleware, async (req, res) => {
                 return {
                     ...mentor.toObject(),
                     matchingSkills,
-                    matchPercentage: Math.round(matchPercentage), // Round to nearest integer
+                    matchPercentage: Math.round(matchPercentage),
                 };
             })
-            .filter((mentor) => mentor.matchPercentage >= 50); // Include only mentors >= 50% match
+            .filter((mentor) => mentor.matchPercentage >= 50);
 
         if (matchingMentors.length === 0) {
             return res.status(404).json({ message: 'No mentors match the selected skills.' });
@@ -40,5 +37,4 @@ router.post('/search', validateSkillsMiddleware, async (req, res) => {
     }
 });
 
-// Export the router
 module.exports = router;

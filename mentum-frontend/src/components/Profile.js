@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import '../styles/Profile.css'; // Style the profile page
+import '../styles/Profile.css';
 
 const Profile = () => {
     const [userData, setUserData] = useState(null);
@@ -37,7 +37,6 @@ const Profile = () => {
             <p><strong>Role:</strong> {userData.userRole}</p>
             <p><strong>University Year:</strong> {userData.userYear}</p>
 
-            {/* Display skills only if the user is a mentor */}
             {userData.userRole === 'Mentor' && (
                 <p><strong>Skills:</strong> {userData.skills.join(', ')}</p>
             )}

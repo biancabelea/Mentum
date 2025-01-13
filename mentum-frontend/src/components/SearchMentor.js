@@ -18,7 +18,7 @@ const SearchMentor = () => {
   const [userSkills, setUserSkills] = useState([]);
   const [matchingMentors, setMatchingMentors] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [searched, setSearched] = useState(false); // Tracks if the search button has been pressed
+  const [searched, setSearched] = useState(false);
   const navigate = useNavigate();
 
   const handleSkillsChange = (event, newValue) => {
@@ -27,24 +27,23 @@ const SearchMentor = () => {
 
   const handleSearch = async () => {
     setLoading(true);
-    setSearched(true); // Mark that the search button has been pressed
+    setSearched(true);
 
     try {
       console.log('Sending request to API with:', userSkills);
       const response = await axios.post('http://localhost:5000/mentors/search', { skills: userSkills });
       console.log('API Response:', response.data);
 
-      setMatchingMentors(response.data); // Save the response
+      setMatchingMentors(response.data);
     } catch (error) {
       console.error('Error fetching mentors:', error);
       if (error.response && error.response.status === 404) {
-        // When no mentors match, set a special state with a message
         setMatchingMentors([{ name: '', matchingSkills: ['No mentors match the selected skills.'] }]);
       } else {
         setMatchingMentors([{ name: '', matchingSkills: ['An error occurred while fetching mentors.'] }]);
       }
     } finally {
-      setLoading(false); // Hide loading indicator after the request is done
+      setLoading(false);
     }
   };
 

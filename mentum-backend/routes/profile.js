@@ -2,15 +2,12 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
 const Resource = require('../models/Resource');
-const profileMiddleware = require('../middleware/profileMiddleware'); // New middleware
+const profileMiddleware = require('../middleware/profileMiddleware');
 
-// Fetch current user's profile
 router.get('/', profileMiddleware, async (req, res) => {
     try {
         const userId = req.user.id;
-        const user = req.user; // User is already attached by the middleware
-
-        // Fetch resources uploaded by the user
+        const user = req.user; 
         const resources = await Resource.find({ uploadedBy: userId });
 
         res.json({
@@ -18,7 +15,7 @@ router.get('/', profileMiddleware, async (req, res) => {
             email: user.email,
             userRole: user.userRole,
             userYear: user.userYear,
-            skills: user.userRole === 'Mentor' ? user.userSkills : [], // Include skills only for mentors
+            skills: user.userRole === 'Mentor' ? user.userSkills : [],
             resources: resources.map((resource) => ({
                 title: resource.title,
                 description: resource.description,

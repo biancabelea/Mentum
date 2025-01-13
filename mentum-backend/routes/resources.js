@@ -5,7 +5,6 @@ const authMiddleware = require('../middleware/authMiddleware');
 const uploadMiddleware = require('../middleware/uploadMiddleware');
 const router = express.Router();
 
-//Add a resource
 router.post('/resources', authMiddleware, (req, res, next) => {
     uploadMiddleware.single('file')(req, res, (err) => {
         if (err instanceof multer.MulterError) {
@@ -19,8 +18,6 @@ router.post('/resources', authMiddleware, (req, res, next) => {
     });
 }, async (req, res) => {
     try {
-        console.log('Request Body:', req.body);
-        console.log('Uploaded File:', req.file);
 
         const { title, description, fileUrl } = req.body;
 
@@ -38,7 +35,6 @@ router.post('/resources', authMiddleware, (req, res, next) => {
             console.error('Validation Error: No file or URL provided');
             return res.status(400).json({ message: 'Either a file or a file URL is required' });
         }
-        console.log('File URL:', resourceFileUrl);
 
         const newResource = new Resource({
             title,
@@ -55,7 +51,6 @@ router.post('/resources', authMiddleware, (req, res, next) => {
     }
 });
 
-//Get all resources
 router.get('/resources', async (req, res) => {
     try {
         const { search, page = 1, limit = 10 } = req.query;
@@ -80,12 +75,11 @@ router.get('/resources', async (req, res) => {
     }
 });
 
-// Get my resources
 router.get('/resources/my', authMiddleware, async (req, res) => {
     try {
         const userId = req.user._id;
         const userResources = await Resource.find({ uploadedBy: userId })
-            .populate('uploadedBy', 'name email'); //join the users collection and retrieve the name and email fields based on uploadedBy
+            .populate('uploadedBy', 'name email'); 
         res.status(200).json({ resources: userResources });
     } catch (error) {
         console.error('Error fetching user resources:', error);
@@ -93,25 +87,21 @@ router.get('/resources/my', authMiddleware, async (req, res) => {
     }
 });
 
-// Delete a resource
 router.delete('/resources/:id', authMiddleware, async (req, res) => {
     try {
         const resourceId = req.params.id;
         const userId = req.user._id;
 
-        // Find the resource to delete
         const resource = await Resource.findById(resourceId);
 
         if (!resource) {
             return res.status(404).json({ message: 'Resource not found' });
         }
 
-        // Check if the logged-in user is the owner of the resource
         if (resource.uploadedBy.toString() !== userId.toString()) {
             return res.status(403).json({ message: 'You are not authorized to delete this resource' });
         }
 
-        // Delete the resource
         await Resource.findByIdAndDelete(resourceId);
 
         res.status(200).json({ message: 'Resource deleted successfully' });

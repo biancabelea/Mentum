@@ -15,15 +15,15 @@
 .searchContent {
     background: rgb(20, 33, 61);
     background: linear-gradient(180deg, rgba(20, 33, 61, 1) 38%, rgba(229, 229, 229, 1) 100%);
-    position: relative; /* Change to relative */
+    position: relative;
     text-align: center;
     width: 100%;
-    min-height: 100vh; /* Ensures full coverage of viewport */
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    padding-bottom: 20px; /* Optional padding for content breathing room */
+    padding-bottom: 20px;
 }
 
 h1 {
@@ -35,7 +35,6 @@ h1 {
     font-size: 40px;
 }
 
-/* Input container styling */
 .input-container {
     display: flex;
     flex-direction: column;
@@ -45,57 +44,53 @@ h1 {
     max-width: 400px;
 }
 
-/* Autocomplete root styling */
 .searchContent .MuiAutocomplete-root {
     width: 100%;
     background-color: transparent;
-    color: var(--white); /* Ensure input text is white */
-}
-
-
-/* Label ("Select Skills") */
-.searchContent .MuiInputLabel-root {
-    color: var(--white); /* Label color */
+    color: var(--white);
 }
 
 .searchContent .MuiInputLabel-root {
-    color: var(--white) !important; /* Force label color to white */
+    color: var(--white);
+}
+
+.searchContent .MuiInputLabel-root {
+    color: var(--white) !important;
 }
 
 .searchContent .MuiInputLabel-root.Mui-focused {
-    color: var(--white) !important; /* Keep label white when focused */
+    color: var(--white) !important;
 }
 
 .searchContent .MuiAutocomplete-inputRoot {
-    color: var(--white); /* Input text color */
+    color: var(--white);
     border-radius: 8px;
-    border: 1px solid var(--grey); /* Light border for outline */
+    border: 1px solid var(--grey);
     padding: 8px;
 }
 
 .searchContent .MuiAutocomplete-input {
-    color: var(--white) !important; /* Text inside the input */
+    color: var(--white) !important;
 }
 
 .searchContent .MuiChip-root {
-    background-color: var(--dark-blue); /* Chip background */
-    color: var(--white) !important; /* Chip text color */
+    background-color: var(--dark-blue);
+    color: var(--white) !important;
     font-size: 14px;
 }
 
 .searchContent .MuiChip-deleteIcon {
-    color: var(--white) !important; /* Delete (X) icon on chips */
+    color: var(--white) !important;
 }
 
 .searchContent .MuiAutocomplete-clearIndicator {
-    color: var(--white) !important; /* Clear (X) icon color */
+    color: var(--white) !important;
 }
 
 .searchContent .MuiAutocomplete-popupIndicator {
-    color: var(--white) !important; /* Dropdown arrow color */
+    color: var(--white) !important;
 }
 
-/* Button Styling */
 .search-button {
     background-color: var(--orange);
     color: white;
@@ -106,7 +101,7 @@ h1 {
     cursor: pointer;
     width: 100%;
     max-width: 200px;
-    margin-top: 5px; /* Bring closer to the input */
+    margin-top: 5px;
     text-align: center; 
     align-self: center;
 }
@@ -120,7 +115,6 @@ h1 {
     outline: none;
 }
 
-/* Results Container */
 .results {
     display: flex;
     gap: 16px;
@@ -185,7 +179,6 @@ h1 {
     color: var(--dark-blue);
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
     .results {
         justify-content: flex-start;

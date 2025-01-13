@@ -68,7 +68,6 @@ button:hover{
 }
 
 .homeContent{
-    background: rgb(20,33,61);
     background: linear-gradient(180deg, rgba(20,33,61,1) 38%, rgba(229,229,229,1) 100%);
     position: absolute;
     text-align: center;
@@ -79,17 +78,16 @@ button:hover{
     flex-direction: column;
     align-items: center;
 }
-/* Adjust text style in the homepage */
+
 .homeContent p {
-    color: var(--white); /* Change to gray or adjust to --white if needed */
-    font-size: 48px; /* Make the text bigger */
-    font-weight: bold; /* Add emphasis */
-    text-align: center; /* Center the text */
-    margin-bottom: 20px; /* Add space below the text */
+    color: var(--white);
+    font-size: 48px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
 }
 
 p {
-    background-color: var(--dark-blue);
     padding: 10px 10px 10px 10px;
     font-weight: bold;
     color: var(--grey);

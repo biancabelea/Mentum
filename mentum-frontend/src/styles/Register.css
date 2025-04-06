@@ -1,0 +1,132 @@
+:root {
+    --white: #ffffff;
+    --grey: #e5e5e5;
+    --orange: #fca311;
+    --dark-blue: #14213d;
+    --black: #000000;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.body-register {
+    height: 100vh;
+    background-color: var(--dark-blue);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    overflow: hidden;
+}
+
+.registration-form {
+    background-color: var(--grey);
+    max-width: 500px;
+    width: 90%;
+    padding: 20px 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+form {
+    width: 100%;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: var(--dark-blue);
+    font-size: 16px;
+    text-align: left;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    text-align: left;
+}
+
+button {
+    background-color: var(--orange);
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-top: 15px;
+    cursor: pointer;
+    width: 100%;
+}
+
+button:hover {
+    background-color: var(--dark-blue);
+    color: white;
+}
+
+.title {
+    font-size: 22px;
+    margin-bottom: 15px;
+    color: var(--dark-blue);
+    text-align: center;
+}
+
+.prompt {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.redirect {
+    color: darkred;
+    cursor: pointer;
+}
+
+.go-back {
+    margin-top: 10px;
+    color: var(--dark-blue);
+    cursor: pointer;
+    font-size: 14px;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .registration-form {
+        padding: 15px;
+        max-width: 90%;
+    }
+
+    .title {
+        font-size: 20px;
+    }
+
+    input,
+    select,
+    button {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .registration-form {
+        padding: 10px;
+    }
+
+    input,
+    select,
+    button {
+        font-size: 12px;
+        padding: 8px;
+    }
+}

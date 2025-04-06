@@ -1,0 +1,141 @@
+:root {
+    --white: #ffffff;
+    --grey: #e5e5e5;
+    --orange: #fca311;
+    --dark-blue: #14213d;
+    --black: #000000;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.add-resource-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.navbar {
+    display: flex;
+    justify-content: right;
+    background-color: var(--dark-blue);
+    padding: 10px 15px 0 0;
+    height: 80px;
+    align-items: center;
+}
+  
+.nav-button {
+    background-color: var(--orange);
+    border: none;
+    padding: 12px 32px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 4px;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    transition-duration: 0.4s;
+    color: inherit;
+    margin: 5px;
+}
+
+.nav-button:hover {
+    background-color: white;
+    color: black;
+}
+
+.body-resources {
+    height: 100vh;
+    background-color: var(--dark-blue);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+form {
+    background-color: var(--grey);
+    padding: 60px;
+    border-radius: 15px;
+    width: 500px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+form .title {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--dark-blue);
+    margin-bottom: 20px;
+}
+
+form label {
+    font-weight: bold;
+    margin-bottom: 10px;
+    display: block;
+    color: var(--dark-blue);
+}
+
+form input,
+form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 16px;
+    border: 1px solid var(--dark-blue);
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+form textarea {
+    resize: none;
+    height: 100px;
+}
+
+.radio-group-container {
+    width: 100%;
+    margin-bottom: 16px;
+}
+
+.radio-group {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.radio-option {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    padding-left: 2px;
+}
+
+.radio-option input[type="radio"] {
+    margin: 0;
+    transform: translateY(1px);
+}
+
+.radio-option label {
+    font-weight: bold;
+    color: var(--dark-blue);
+}
+
+button {
+    background-color: var(--orange);
+    color: var(--white);
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+    margin-top: 20px;
+    text-align: center;
+}
+
+button:hover {
+    background-color: var(--dark-blue);
+    color: var(--white);
+}

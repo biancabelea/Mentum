@@ -1,0 +1,191 @@
+:root {
+    --white: #ffffff;
+    --grey: #e5e5e5;
+    --orange: #fca311;
+    --dark-blue: #14213d;
+    --black: #000000;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.searchContent {
+    background: rgb(20, 33, 61);
+    background: linear-gradient(180deg, rgba(20, 33, 61, 1) 38%, rgba(229, 229, 229, 1) 100%);
+    position: relative;
+    text-align: center;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 20px;
+}
+
+h1 {
+    background-color: var(--dark-blue);
+    padding: 10px;
+    font-weight: bold;
+    color: var(--grey);
+    border-radius: 10px;
+    font-size: 40px;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    max-width: 400px;
+}
+
+.searchContent .MuiAutocomplete-root {
+    width: 100%;
+    background-color: transparent;
+    color: var(--white);
+}
+
+.searchContent .MuiInputLabel-root {
+    color: var(--white);
+}
+
+.searchContent .MuiInputLabel-root {
+    color: var(--white) !important;
+}
+
+.searchContent .MuiInputLabel-root.Mui-focused {
+    color: var(--white) !important;
+}
+
+.searchContent .MuiAutocomplete-inputRoot {
+    color: var(--white);
+    border-radius: 8px;
+    border: 1px solid var(--grey);
+    padding: 8px;
+}
+
+.searchContent .MuiAutocomplete-input {
+    color: var(--white) !important;
+}
+
+.searchContent .MuiChip-root {
+    background-color: var(--dark-blue);
+    color: var(--white) !important;
+    font-size: 14px;
+}
+
+.searchContent .MuiChip-deleteIcon {
+    color: var(--white) !important;
+}
+
+.searchContent .MuiAutocomplete-clearIndicator {
+    color: var(--white) !important;
+}
+
+.searchContent .MuiAutocomplete-popupIndicator {
+    color: var(--white) !important;
+}
+
+.search-button {
+    background-color: var(--orange);
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+    max-width: 200px;
+    margin-top: 5px;
+    text-align: center; 
+    align-self: center;
+}
+
+.search-button:hover {
+    background-color: var(--dark-blue);
+    color: var(--white);
+}
+
+.search-button:focus {
+    outline: none;
+}
+
+.results {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 20px;
+    width: 100%;
+}
+
+.mentor-card {
+    background-color: var(--white);
+    border: 1px solid var(--grey);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: calc(100% / 3 - 20px);
+    max-width: 300px;
+    min-width: 250px;
+    padding: 20px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.mentor-card h3 {
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--dark-blue);
+    
+}
+
+.mentor-card h3:hover {
+    color: var(--dark-blue);
+}
+
+.mentor-link {
+    font-size: 20px;
+    color: var(--orange);
+    text-decoration: none;
+    align-self: flex-end;
+}
+
+.mentor-link:hover {
+    color: var(--dark-blue);
+}
+
+.mentor-card p {
+    font-size: 14px;
+    color: var(--grey);
+    font-weight: normal;
+    margin-top: 10px;
+}
+
+.contact-mentor {
+    font-size: 14px;
+    color: var(--orange);
+    text-decoration: none;
+    align-self: flex-end;
+}
+
+.contact-mentor:hover {
+    color: var(--dark-blue);
+}
+
+@media (max-width: 768px) {
+    .results {
+        justify-content: flex-start;
+    }
+
+    .mentor-card {
+        width: 100%;
+        max-width: 100%;
+    }
+}

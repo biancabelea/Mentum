@@ -1,27 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
-import '../styles/Profile.css';
+import { useUserProfile } from '../api/rest/useUserProfile';
+import '../../styles/Profile.css';
 
 const UserProfile = () => {
     const { id } = useParams();
-    const [userData, setUserData] = useState(null);
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        const fetchUserData = async () => {
-            try {
-                const response = await axios.get(`http://localhost:5000/user-profile/${id}`);
-                setUserData(response.data);
-            } catch (error) {
-                console.error('Error fetching user data:', error);
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchUserData();
-    }, [id]);
+    const { userData, loading } = useUserProfile(id);
 
     if (loading) return <p>Loading...</p>;
     if (!userData) return <p>User not found.</p>;
@@ -39,17 +23,16 @@ const UserProfile = () => {
                 <h2>Uploaded Resources</h2>
                 {userData.resources.length > 0 ? (
                     <ul className="resources-list">
-                    {userData.resources.map((resource, index) => (
-                        <li key={index}>
-                            <h3>{resource.title}</h3>
-                            <p>{resource.description}</p>
-                            <a href={resource.fileUrl} target="_blank" rel="noopener noreferrer">
-                                View Resource
-                            </a>
-                        </li>
-                    ))}
-                </ul>
-                
+                        {userData.resources.map((resource, index) => (
+                            <li key={index}>
+                                <h3>{resource.title}</h3>
+                                <p>{resource.description}</p>
+                                <a href={resource.fileUrl} target="_blank" rel="noopener noreferrer">
+                                    View Resource
+                                </a>
+                            </li>
+                        ))}
+                    </ul>
                 ) : (
                     <p>No uploaded resources.</p>
                 )}

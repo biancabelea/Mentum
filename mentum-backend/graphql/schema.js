@@ -121,7 +121,7 @@ const Mutation = new GraphQLObjectType({
       async resolve(_, { input }) {
         const hashedPassword = await bcrypt.hash(input.password, 10);
         await User.create({ ...input, password: hashedPassword });
-        return { message: 'User registered' };
+        return 'User registered';
       },
     },
     login: {

@@ -4,7 +4,7 @@ import axios from 'axios';
  * Logs in a user with email and password.
  */
 export async function login(credentials) {
-  const response = await axios.post('http://localhost:5000/login', credentials, {
+  const response = await axios.post('http://localhost:5000/auth/login', credentials, {
     headers: { 'Content-Type': 'application/json' },
   });
 

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import Chip from '@mui/material/Chip';
-import '../../styles/SearchMentor.css';
+import '../styles/SearchMentor.css';
 import { useMentorSearch } from '../api/rest/useMentorSearch';
 
 const skills = [

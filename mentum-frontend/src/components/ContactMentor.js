@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import '../../styles/ContactMentor.css';
+import '../styles/ContactMentor.css';
 import { contactMentor } from '../api/rest/contactMentor';
 
 const ContactMentor = () => {

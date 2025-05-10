@@ -1,6 +1,6 @@
 import React from 'react';
 import { useUserProfile } from '../api/rest/useUserProfile';
-import '../../styles/Profile.css';
+import '../styles/Profile.css';
 
 const Profile = () => {
     const { userData, loading } = useUserProfile();

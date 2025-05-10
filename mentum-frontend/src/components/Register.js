@@ -4,7 +4,7 @@ import { register } from '../api/rest/authService';
 import Chip from '@mui/material/Chip';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
-import '../../styles/Register.css';
+import '../styles/Register.css';
 
 const skills = [
   'React', 'NodeJS', '.NET', 'Java', 'Python', 'C++', 'JavaScript', 'Ruby', 'Swift', 'HTML',

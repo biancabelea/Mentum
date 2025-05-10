@@ -1,6 +1,6 @@
 import React from 'react';
 import { logout, isLoggedIn } from '../api/rest/authService';
-import '../../styles/Homepage.css';
+import '../styles/Homepage.css';
 
 function Homepage() {
   return (

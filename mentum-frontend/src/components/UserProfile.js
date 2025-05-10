@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useUserProfile } from '../api/rest/useUserProfile';
-import '../../styles/Profile.css';
+import '../styles/Profile.css';
 
 const UserProfile = () => {
     const { id } = useParams();

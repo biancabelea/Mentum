@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
-import '../../styles/ResourceList.css';
+import '../styles/ResourceList.css';
 import { useResources } from '../api/rest/useResources';
 import axios from 'axios';
 

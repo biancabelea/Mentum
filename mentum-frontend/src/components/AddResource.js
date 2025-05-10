@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { addResource } from '../api/rest/addResource';
-import '../../styles/AddResource.css';
+import '../styles/AddResource.css';
 
 function AddResource() {
   const [formData, setFormData] = useState({

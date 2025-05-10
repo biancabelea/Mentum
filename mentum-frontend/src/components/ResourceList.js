@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../../styles/ResourceList.css';
+import '../styles/ResourceList.css';
 import { useResources } from '../api/rest/useResources';
 
 function ResourceList() {

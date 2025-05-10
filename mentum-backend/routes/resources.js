@@ -5,7 +5,7 @@ const authMiddleware = require('../middleware/authMiddleware');
 const uploadMiddleware = require('../middleware/uploadMiddleware');
 const router = express.Router();
 
-router.post('/resources', authMiddleware, (req, res, next) => {
+router.post('/', authMiddleware, (req, res, next) => {
     uploadMiddleware.single('file')(req, res, (err) => {
         if (err instanceof multer.MulterError) {
             console.error('Multer Error:', err.message);
@@ -51,7 +51,7 @@ router.post('/resources', authMiddleware, (req, res, next) => {
     }
 });
 
-router.get('/resources', async (req, res) => {
+router.get('/', async (req, res) => {
     try {
         const { search, page = 1, limit = 10 } = req.query;
         const query = search ? {
@@ -75,7 +75,7 @@ router.get('/resources', async (req, res) => {
     }
 });
 
-router.get('/resources/my', authMiddleware, async (req, res) => {
+router.get('/my', authMiddleware, async (req, res) => {
     try {
         const userId = req.user._id;
         const userResources = await Resource.find({ uploadedBy: userId })
@@ -87,7 +87,7 @@ router.get('/resources/my', authMiddleware, async (req, res) => {
     }
 });
 
-router.delete('/resources/:id', authMiddleware, async (req, res) => {
+router.delete('/:id', authMiddleware, async (req, res) => {
     try {
         const resourceId = req.params.id;
         const userId = req.user._id;

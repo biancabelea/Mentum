@@ -37,4 +37,18 @@ router.post('/search', validateSkillsMiddleware, async (req, res) => {
     }
 });
 
+router.get('/:id', async (req, res) => {
+    try {
+        const mentor = await User.findById(req.params.id);
+        if (!mentor || mentor.userRole !== 'Mentor') {
+            return res.status(404).json({ message: 'Mentor not found.' });
+        }
+        res.json(mentor);
+    } catch (error) {
+        console.error('Error fetching mentor by ID:', error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+});
+
+
 module.exports = router;

@@ -10,6 +10,7 @@ import ContactMentor from './components/ContactMentor';
 import SearchMentor from './components/SearchMentor';
 import Profile from './components/Profile';
 import UserProfile from './components/UserProfile';
+import Booking from './components/Booking';
 
 function App() {
     return (
@@ -25,6 +26,7 @@ function App() {
                 <Route path="/mentors-search" element={<SearchMentor />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/user-profile/:id" element={<UserProfile />} />
+                <Route path="/book/:mentorId" element={<Booking />} />
             </Routes>
         </BrowserRouter>
     );

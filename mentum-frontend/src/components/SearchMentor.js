@@ -83,16 +83,25 @@ const SearchMentor = () => {
                   </h3>
                   <p>Matched Skills: {mentor.matchingSkills.join(', ')}</p>
                   <p>Match Percentage: {mentor.matchPercentage}%</p>
-                  <a
-                    className="contact-mentor"
-                    href="#"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleContactMentor(mentor);
-                    }}
-                  >
-                    Contact Mentor
-                  </a>
+                  <div className="mentor-actions">
+                    <a
+                      className="contact-mentor"
+                      href="#"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleContactMentor(mentor);
+                      }}
+                    >
+                      Contact Mentor
+                    </a>
+                    <a
+                      className="contact-mentor"
+                      style={{ marginLeft: 'auto' }}
+                      href={`/book/${mentor._id}`}
+                    >
+                      Book Session
+                    </a>
+                  </div>
                 </div>
               ))
             ) : (

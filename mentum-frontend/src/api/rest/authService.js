@@ -8,8 +8,13 @@ export async function login(credentials) {
     headers: { 'Content-Type': 'application/json' },
   });
 
-  localStorage.setItem('token', response.data.token);
+  const token = response.data.token;
+  localStorage.setItem('token', token);
   localStorage.setItem('userEmail', response.data.user.email);
+
+  axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+  console.log('Auth header set:', axios.defaults.headers.common['Authorization']);
+
   return response.data;
 }
 

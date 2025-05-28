@@ -43,3 +43,14 @@
 .cancel-button:hover {
   background: #d9363e;
 }
+
+.booking-card.available {
+  background-color: #4caf50;
+  color: white;
+}
+
+.booking-card.booked {
+  background-color: #9e9e9e;
+  color: white;
+  cursor: not-allowed;
+}

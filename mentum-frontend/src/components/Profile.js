@@ -20,6 +20,15 @@ const Profile = () => {
                     <p><strong>Skills:</strong> {userData.skills.join(', ')}</p>
                 )}
 
+                {userData.userRole === 'Mentor' && (
+                    <button
+                        className="availability-button"
+                        onClick={() => window.location.href = '/mentor/availability'}
+                    >
+                        Manage Availability
+                    </button>
+                )}
+
                 <h2>Uploaded Resources</h2>
                 {userData.resources.length > 0 ? (
                     <ul className="resources-list">

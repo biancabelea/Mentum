@@ -1,81 +1,108 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
 import BookingCard from './BookingCard';
 import '../styles/Booking.css';
+import { useParams } from 'react-router-dom';
 
 const Booking = () => {
   const { mentorId } = useParams();
   const [mentor, setMentor] = useState(null);
-  const [bookings, setBookings] = useState([]);
+  const [slots, setSlots] = useState([]);
+  const [myBookings, setMyBookings] = useState([]);
+
+  const token = localStorage.getItem('token');
+  const authHeaders = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
 
   useEffect(() => {
-    const fetchMentor = async () => {
-      const { data } = await axios.get(`http://localhost:5000/mentors/${mentorId}`);
-      setMentor(data);
-    };
-
-    const fetchBookings = async () => {
-      const token = localStorage.getItem('token');
-      const { data } = await axios.get('http://localhost:5000/bookings', {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      setBookings(data);
-    };
-
     fetchMentor();
-    fetchBookings();
-  }, [mentorId]);
+    loadSlots(mentorId);
+    fetchMyBookings();
+  }, []);
 
-  const handleBooking = async (mentorId, slot) => {
-    const token = localStorage.getItem('token');
+  const fetchMentor = async () => {
     try {
-      await axios.post(
-        'http://localhost:5000/bookings',
-        { mentorId, date: slot, duration: 30 },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-      alert('Booking successful');
-    } catch (error) {
-      alert('Booking failed');
+      const res = await axios.get(`http://localhost:5000/mentors/${mentorId}`, authHeaders);
+      setMentor(res.data);
+    } catch (err) {
+      console.error('Error fetching mentor:', err);
     }
   };
 
-  const handleCancel = async (bookingId) => {
-    const token = localStorage.getItem('token');
+  const loadSlots = async (mentorId) => {
     try {
-      await axios.delete(`http://localhost:5000/bookings/${bookingId}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      alert('Booking cancelled');
-      setBookings(bookings.filter(b => b._id !== bookingId));
-    } catch (error) {
+      const res = await axios.get(`http://localhost:5000/availability/mentor/${mentorId}`, authHeaders);
+      setSlots(res.data);
+    } catch (err) {
+      console.error('Error loading slots:', err);
+    }
+  };
+
+  const fetchMyBookings = async () => {
+    try {
+      const res = await axios.get('http://localhost:5000/bookings', authHeaders);
+      setMyBookings(res.data);
+    } catch (err) {
+      console.error('Error fetching my bookings:', err);
+    }
+  };
+
+  const handleBook = async (slot) => {
+    try {
+      const res = await axios.post('http://localhost:5000/bookings', { slotId: slot._id }, authHeaders);
+      const newBooking = res.data;
+      setMyBookings((prev) => [...prev, newBooking]);
+      setSlots((prev) => prev.filter((s) => s._id !== slot._id));
+      alert('Booking successful!');
+      return true;
+    } catch (err) {
+      alert('Booking failed');
+      return false;
+    }
+  };
+
+  const handleCancel = async (bookingId, slot) => {
+    try {
+      await axios.delete(`http://localhost:5000/bookings/${bookingId}`, authHeaders);
+      setMyBookings((prev) => prev.filter((b) => b._id !== bookingId));
+      loadSlots(slot.mentor);
+    } catch (err) {
       alert('Failed to cancel booking');
     }
   };
 
   return (
-    <div className="booking-page">
-      <h2 className="booking-heading">Book a Slot</h2>
+    <div>
+      <h2>Book a Slot</h2>
       {mentor && (
         <BookingCard
           mentor={mentor}
-          onBook={(slot) => handleBooking(mentor._id, slot)}
+          slots={slots}
+          onBook={handleBook}
+          refreshSlots={() => loadSlots(mentorId)}
         />
       )}
 
-      <h2 className="booking-heading">My Bookings</h2>
-      <div className="booking-list">
-        {bookings.map((booking) => (
-          <div key={booking._id} className="booking-item">
-            <p>
-              <strong>Mentor:</strong> {booking.mentor.name}<br />
-              <strong>Slot:</strong> {new Date(booking.date).toLocaleString()}
-            </p>
-            <button className="cancel-button" onClick={() => handleCancel(booking._id)}>Cancel</button>
-          </div>
-        ))}
-      </div>
+      <h2>My Bookings</h2>
+      {myBookings.map((booking) => (
+        <div key={booking._id} className="booking-card booked">
+          {booking.slot && (
+            <>
+              <p><strong>Mentor:</strong> {booking.slot.mentor?.name || 'Unknown'}</p>
+              <p><strong>Slot:</strong> {new Date(booking.slot.date).toLocaleString()}</p>
+              <button
+                className="cancel-button"
+                onClick={() => handleCancel(booking._id, booking.slot)}
+              >
+                Cancel
+              </button>
+            </>
+          )}
+        </div>
+      ))}
     </div>
   );
 };

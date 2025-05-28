@@ -16,6 +16,9 @@ router.get('/', authMiddleware, async (req, res) => {
 
 // POST create availability slot
 router.post('/', authMiddleware, async (req, res) => {
+  console.log('POST availability request:', req.body);
+console.log('Authenticated user:', req.user);
+
   try {
     const { date, duration } = req.body;
     const slot = new Availability({
@@ -34,14 +37,41 @@ router.post('/', authMiddleware, async (req, res) => {
 // DELETE availability slot
 router.delete('/:id', authMiddleware, async (req, res) => {
   try {
-    const slot = await Availability.findOne({ _id: req.params.id, mentor: req.user.id });
-    if (!slot) return res.status(404).json({ message: 'Slot not found' });
-    if (slot.isBooked) return res.status(400).json({ message: 'Cannot delete booked slot' });
-    await slot.deleteOne();
+    console.log('DELETE slot called:', req.params.id);
+
+    const deleted = await Availability.findByIdAndDelete(req.params.id);
+    if (!deleted) {
+      console.log('Slot not found or already deleted.');
+      return res.status(404).json({ message: 'Slot not found' });
+    }
+
+    console.log('Slot deleted successfully');
     res.json({ message: 'Slot deleted' });
+  } catch (err) {
+    console.error('Delete slot error:', err);
+    res.status(500).json({ message: 'Failed to delete slot' });
+  }
+});
+
+
+// Public: Get availability for a specific mentor
+router.get('/mentor/:mentorId', async (req, res) => {
+  try {
+    const slots = await Availability.find({
+      mentor: req.params.mentorId,
+      isBooked: false, // Optional: only show available ones
+    });
+    res.json(slots);
   } catch (err) {
     res.status(500).json({ message: 'Server error' });
   }
+});
+
+router.get('/me', authMiddleware, async (req, res) => {
+  console.log('GET /availability/me called');
+  console.log('User:', req.user);
+  const slots = await Availability.find({ mentor: req.user.id });
+  res.json(slots);
 });
 
 module.exports = router;

@@ -1,78 +1,84 @@
 const express = require('express');
 const router = express.Router();
 const Booking = require('../models/Booking');
+const Availability = require('../models/Availability');
 const authMiddleware = require('../middleware/authMiddleware');
 
-// Create a booking
-router.post('/', authMiddleware, async (req, res) => {
-  try {
-    const { mentorId, date, duration } = req.body;
-    const menteeId = req.user._id;
-
-    // Check for overlapping bookings for this mentor
-    const start = new Date(date);
-    const end = new Date(start.getTime() + (duration || 30) * 60000);
-
-    const conflict = await Booking.findOne({
-      mentor: mentorId,
-      date: { $gte: start, $lt: end },
-      status: { $ne: 'cancelled' },
-    });
-
-    if (conflict) {
-      return res.status(409).json({ message: 'This slot is already booked.' });
-    }
-
-    const booking = await Booking.create({
-      mentor: mentorId,
-      mentee: menteeId,
-      date: start,
-      duration,
-    });
-
-    res.status(201).json(booking);
-  } catch (err) {
-    res.status(500).json({ message: 'Booking creation failed.' });
-  }
-});
-
-// Get current user's bookings (as mentee or mentor)
+// GET all bookings for the logged-in user
 router.get('/', authMiddleware, async (req, res) => {
   try {
-    const userId = req.user._id;
-    const bookings = await Booking.find({
-      $or: [{ mentor: userId }, { mentee: userId }],
-    })
-      .populate('mentor', 'name')
-      .populate('mentee', 'name')
-      .sort({ date: 1 });
+    const bookings = await Booking.find({ mentee: req.user._id })
+      .populate('slot')
+      .populate('mentor');
 
-    res.json(bookings);
-  } catch (err) {
+    const validBookings = bookings.filter(b => b.slot && b.mentor);
+    res.json(validBookings);
+  } catch (error) {
+    console.error('💥 Booking fetch failed:', error);
     res.status(500).json({ message: 'Failed to fetch bookings.' });
   }
 });
 
-// Cancel a booking by ID
+// Book a slot
+router.post('/', authMiddleware, async (req, res) => {
+  try {
+    const { slotId } = req.body;
+    const menteeId = req.user._id;
+
+    const availability = await Availability.findById(slotId);
+    if (!availability || availability.isBooked) {
+      return res.status(400).json({ message: 'Slot is not available' });
+    }
+
+    const start = new Date(availability.date);
+
+    const booking = await Booking.create({
+      mentor: availability.mentor,
+      mentee: menteeId,
+      slot: availability._id,
+      date: start,
+      duration: availability.duration,
+    });
+
+    await Availability.findByIdAndUpdate(slotId, { isBooked: true });
+
+    // ✅ Populate mentor & mentee for proper frontend display
+    const populatedBooking = await Booking.findById(booking._id)
+      .populate({
+        path: 'slot',
+        populate: {
+          path: 'mentor',
+          model: 'User',
+          select: 'name',
+        },
+      });
+
+    res.status(201).json(populatedBooking);
+  } catch (err) {
+    console.error('Booking error:', err);
+    res.status(500).json({ message: 'Failed to book slot' });
+  }
+});
+
+// Cancel a booking
 router.delete('/:id', authMiddleware, async (req, res) => {
   try {
     const booking = await Booking.findById(req.params.id);
-    if (!booking) return res.status(404).json({ message: 'Booking not found' });
-
-    // Allow cancel if you're involved
-    if (
-      booking.mentee.toString() !== req.user._id &&
-      booking.mentor.toString() !== req.user._id
-    ) {
-      return res.status(403).json({ message: 'Not authorized to cancel' });
+    if (!booking) {
+      return res.status(404).json({ message: 'Booking not found' });
     }
 
-    booking.status = 'cancelled';
-    await booking.save();
+    if (booking.mentee.toString() !== req.user._id.toString()) {
+      return res.status(403).json({ message: 'Unauthorized' });
+    }
 
-    res.json({ message: 'Booking cancelled.' });
+    await Booking.findByIdAndDelete(req.params.id);
+    await Availability.findByIdAndUpdate(booking.slot, { isBooked: false });
+
+    res.json({ message: 'Booking canceled' });
   } catch (err) {
-    res.status(500).json({ message: 'Failed to cancel booking.' });
+    console.error('Cancel booking error:', err);
+    res.status(500).json({ message: 'Failed to cancel booking' });
   }
 });
 

@@ -11,6 +11,7 @@ import SearchMentor from './components/SearchMentor';
 import Profile from './components/Profile';
 import UserProfile from './components/UserProfile';
 import Booking from './components/Booking';
+import MentorAvailability from './components/MentorAvailability';
 
 function App() {
     return (
@@ -27,6 +28,7 @@ function App() {
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/user-profile/:id" element={<UserProfile />} />
                 <Route path="/book/:mentorId" element={<Booking />} />
+                <Route path="/mentor/availability" element={<MentorAvailability />} />
             </Routes>
         </BrowserRouter>
     );

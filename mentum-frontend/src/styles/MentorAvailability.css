@@ -1,0 +1,64 @@
+/* MentorAvailability.css */
+.mentor-availability {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background: #f0f2f5;
+  border-radius: 10px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+}
+
+.mentor-availability h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.mentor-availability input,
+.mentor-availability select {
+  margin-right: 0.5rem;
+  padding: 0.4rem 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+.mentor-availability button {
+  padding: 0.4rem 0.8rem;
+  background-color: #4caf50;
+  border: none;
+  color: white;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.mentor-availability button:hover {
+  background-color: #388e3c;
+}
+
+.mentor-availability ul {
+  list-style: none;
+  padding: 0;
+}
+
+.mentor-availability li {
+  background: #fff;
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.5rem;
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #ddd;
+}
+
+.mentor-availability li button {
+  background-color: #ff4d4f;
+  margin-left: 1rem;
+}
+
+.mentor-availability li button:hover {
+  background-color: #d9363e;
+}

@@ -33,6 +33,7 @@ app.use('/user-profile', require('./routes/userProfile'));
 app.use('/mentors', require('./routes/mentors'));
 app.use('/comments', require('./routes/comments'));
 app.use('/bookings', require('./routes/bookings'));
+app.use('/availability', require('./routes/availability'));
 
 async function startServer() {
   const server = new ApolloServer({

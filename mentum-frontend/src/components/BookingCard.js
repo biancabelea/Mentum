@@ -1,17 +1,24 @@
 import React from 'react';
 import '../styles/BookingCard.css';
 
-const BookingCard = ({ mentor, onBook }) => {
+const BookingCard = ({ mentor, slots, onBook, refreshSlots }) => {
+  const handleClick = async (slot) => {
+    const success = await onBook(slot);
+    if (success) {
+      refreshSlots(mentor._id); // refresh only this mentor's slots
+    }
+  };
+  
   return (
     <div className="booking-card">
       <h4>{mentor.name}</h4>
-      {mentor.availability && mentor.availability.length > 0 ? (
-        mentor.availability.map((slot) => (
+      {slots && slots.length > 0 ? (
+        slots.map((slot) => (
           <button
-            key={slot}
-            onClick={() => onBook(slot)}
+            key={slot._id}
+            onClick={() => handleClick(slot)}
           >
-            {slot}
+            {new Date(slot.date).toLocaleString()} ({slot.duration} min)
           </button>
         ))
       ) : (
@@ -22,3 +29,4 @@ const BookingCard = ({ mentor, onBook }) => {
 };
 
 export default BookingCard;
+

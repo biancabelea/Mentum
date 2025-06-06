@@ -8,6 +8,11 @@ module.exports = {
         : {};
       return await Resource.find(filter).populate('uploadedBy', 'name');
     },
+
+    myResources: async (_, __, context) => {
+      if (!context.user) throw new Error('Authentication required');
+      return await Resource.find({ uploadedBy: context.user._id }).populate('uploadedBy', 'name');
+    }
   },
 
   Mutation: {

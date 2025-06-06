@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import { ApolloProvider } from '@apollo/client';
-import { apolloClient } from './api/graphql/apolloClient';
+import { client } from './api/graphql/apolloClient';
 import axios from 'axios'; 
 
 const token = localStorage.getItem('token');
@@ -12,7 +12,7 @@ if (token) {
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <ApolloProvider client={apolloClient}>
+  <ApolloProvider client={client}>
     <React.StrictMode>
       <App />
     </React.StrictMode>

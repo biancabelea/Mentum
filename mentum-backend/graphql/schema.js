@@ -1,6 +1,8 @@
 const { gql } = require('apollo-server-express');
 
 module.exports = gql`
+  scalar DateTime
+
   type User {
     _id: ID!
     name: String!
@@ -40,6 +42,28 @@ module.exports = gql`
     matchPercentage: Int
   }
 
+  type Availability {
+    _id: ID!
+    mentor: User!
+    date: String!
+    duration: Int!
+    isBooked: Boolean!
+    createdAt: String!
+    updatedAt: String!
+  }
+
+  type Booking {
+    _id: ID!
+    slot: Availability!
+    date: String!
+    duration: Int!
+    status: String!
+    mentor: User!
+    mentee: User!
+    createdAt: String!
+    updatedAt: String!
+  }
+
   input RegisterInput {
     name: String!
     email: String!
@@ -60,11 +84,25 @@ module.exports = gql`
     resource: ID!
   }
 
+  input AddAvailabilityInput {
+    date: String!
+    duration: Int!
+  }
+
+  input BookSlotInput {
+    slotId: ID!
+  }
+
   type Query {
     userProfile: User
     resources(search: String): [Resource]
+    myResources: [Resource]
     comments(resourceId: ID!): [Comment]
     searchMentors(skills: [String]!): [MentorSearchResult]
+
+    myAvailability: [Availability!]!
+    mentorAvailability(mentorId: ID!): [Availability!]!
+    myBookings: [Booking!]!
   }
 
   type Mutation {
@@ -72,5 +110,10 @@ module.exports = gql`
     login(email: String!, password: String!): LoginResponse
     addResource(input: ResourceInput!): Resource
     addComment(input: CommentInput!): Comment
+
+    addAvailability(input: AddAvailabilityInput!): Availability!
+    deleteAvailability(id: ID!): Boolean!
+    bookSlot(input: BookSlotInput!): Booking!
+    cancelBooking(id: ID!): Boolean!
   }
 `;

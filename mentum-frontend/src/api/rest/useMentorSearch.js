@@ -1,9 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
 
-/**
- * Hook to search for mentors by skills.
- */
 export function useMentorSearch() {
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);

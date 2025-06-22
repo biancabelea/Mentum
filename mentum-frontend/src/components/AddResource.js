@@ -44,7 +44,6 @@ function AddResource() {
       setMessage('Resource added successfully!');
       navigate('/resources/my');
     } catch (error) {
-      console.error('Error adding resource:', error);
       setMessage(error.message || 'Failed to add resource.');
     }
   };

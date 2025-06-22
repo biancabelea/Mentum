@@ -110,7 +110,6 @@ module.exports = gql`
     login(email: String!, password: String!): LoginResponse
     addResource(input: ResourceInput!): Resource
     addComment(input: CommentInput!): Comment
-
     addAvailability(input: AddAvailabilityInput!): Availability!
     deleteAvailability(id: ID!): Boolean!
     bookSlot(input: BookSlotInput!): Booking!

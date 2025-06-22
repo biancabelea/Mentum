@@ -7,7 +7,6 @@ const authMiddleware = async (req, res, next) => {
         if (!authHeader) return next();
 
         const token = authHeader.replace('Bearer ', '');
-        console.log('Token:', token);
 
         if (!token) return res.status(401).json({ message: 'Authentication required' });
 

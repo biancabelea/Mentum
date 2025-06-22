@@ -3,18 +3,15 @@ const router = express.Router();
 const User = require('../models/User');
 const validateSkillsMiddleware = require('../middleware/validateSkillsMiddleware');
 
-// ✅ Basic GET route for /mentors
 router.get('/', async (req, res) => {
   try {
     const mentors = await User.find({ userRole: 'Mentor' });
     res.json(mentors);
   } catch (error) {
-    console.error('Error fetching mentors:', error);
     res.status(500).json({ message: 'Internal Server Error' });
   }
 });
 
-// Skill-based mentor search
 router.post('/search', validateSkillsMiddleware, async (req, res) => {
   try {
     const { skills } = req.body;
@@ -44,12 +41,10 @@ router.post('/search', validateSkillsMiddleware, async (req, res) => {
 
     res.json(matchingMentors);
   } catch (error) {
-    console.error('Error fetching mentors:', error);
     res.status(500).json({ message: 'Internal Server Error' });
   }
 });
 
-// Individual mentor by ID
 router.get('/:id', async (req, res) => {
   try {
     const mentor = await User.findById(req.params.id);
@@ -58,7 +53,6 @@ router.get('/:id', async (req, res) => {
     }
     res.json(mentor);
   } catch (error) {
-    console.error('Error fetching mentor by ID:', error);
     res.status(500).json({ message: 'Internal Server Error' });
   }
 });

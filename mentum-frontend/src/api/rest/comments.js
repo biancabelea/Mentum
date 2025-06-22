@@ -5,7 +5,6 @@ export const getComments = async (resourceId) => {
     const response = await axios.get(`http://localhost:5000/comments/${resourceId}`);
     return response.data;
   } catch (error) {
-    console.error('Error fetching comments:', error);
     return [];
   }
 };
@@ -20,7 +19,6 @@ export const useAddComment = () => {
       );
       return response.data;
     } catch (error) {
-      console.error('Error posting comment:', error);
       throw error;
     }
   };

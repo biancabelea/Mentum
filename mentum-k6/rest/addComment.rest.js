@@ -1,5 +1,3 @@
-// mentum-k6/addComment.rest.js
-
 import http from 'k6/http';
 import { check, sleep } from 'k6';
 
@@ -40,10 +38,7 @@ export default function () {
   };
 
   const res = http.post(BASE_URL, JSON.stringify(payload), { headers });
-
-  console.log(`[RES ${res.status}] ${res.body}`);
-  console.log(`[COMMENT] ${JSON.stringify(payload)}`);
-
+  
   check(res, {
     'status is 201': (r) => r.status === 201,
     'body has comment': (r) => r.json().resource !== undefined,

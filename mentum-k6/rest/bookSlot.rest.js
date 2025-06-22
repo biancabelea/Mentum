@@ -26,9 +26,6 @@ export default function () {
 
   const res = http.post(`${BASE_URL}/bookings`, payload, headers);
 
-  console.log('Status:', res.status);
-  console.log('Response body:', res.body);
-
   check(res, {
     'is status 201': (r) => r.status === 201,
     'has slot info': (r) => r.body && r.body.includes('slot'),

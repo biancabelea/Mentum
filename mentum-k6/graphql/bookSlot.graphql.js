@@ -46,9 +46,7 @@ export default function () {
   };
 
   const res = http.post(BASE_URL, payload, { headers });
-  console.log(JSON.stringify(res.json(), null, 2));
-
-
+  
   check(res, {
     'status is 200': (r) => r.status === 200,
     'contains booking id': (r) => {

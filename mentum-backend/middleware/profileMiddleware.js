@@ -23,8 +23,6 @@ const profileMiddleware = async (req, res, next) => {
         req.user = user;
         next();
     } catch (error) {
-        console.error('Error in profileMiddleware:', error);
-
         if (error.name === 'TokenExpiredError') {
             return res.status(401).json({ message: 'Token has expired. Please log in again.' });
         }

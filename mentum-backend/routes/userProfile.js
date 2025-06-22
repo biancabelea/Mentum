@@ -27,7 +27,6 @@ router.get('/:id', async (req, res) => {
             })),
         });
     } catch (error) {
-        console.error('Error fetching user profile:', error);
         res.status(500).json({ message: 'Internal Server Error' });
     }
 });

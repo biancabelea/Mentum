@@ -1,4 +1,3 @@
-// /graphql/availabilityBookingResolvers.js
 const Availability = require('../../models/Availability');
 const Booking = require('../../models/Booking');
 const User = require('../../models/User');

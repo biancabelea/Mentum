@@ -23,7 +23,6 @@ function Login() {
       navigate('/');
     } catch (error) {
       setError(error.response?.data?.message || 'Something went wrong');
-      console.error('Login failed:', error);
     }
   };
 

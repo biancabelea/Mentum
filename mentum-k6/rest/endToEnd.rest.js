@@ -25,7 +25,7 @@ export default function () {
   check(loginRes, {
     'login status is 200': r => r.status === 200,
     'token exists': r => token !== undefined && token !== '',
-  }) || fail('❌ Login failed');
+  }) || fail('Login failed');
 
   const authHeaders = {
     headers: {
@@ -41,7 +41,7 @@ export default function () {
   check(searchRes, {
     'mentor search status is 200': r => r.status === 200,
     'mentors found': () => mentors.length > 0,
-  }) || fail('❌ No mentors found');
+  }) || fail('No mentors found');
 
   // Step 3: Check availability
   let foundSlot = null;
@@ -60,7 +60,7 @@ export default function () {
     }
   }
 
-  check(foundSlot, { 'free slot found': s => s !== null }) || fail('❌ No free slot found');
+  check(foundSlot, { 'free slot found': s => s !== null }) || fail('No free slot found');
 
   // Step 4: Book slot
   const bookRes = http.post(`${BASE_URL}/bookings`, JSON.stringify({ slotId: foundSlot._id }), authHeaders);
@@ -68,9 +68,7 @@ export default function () {
   if (!check(bookRes, {
     'slot booked': res => (res.status === 200 || res.status === 201) && res.json('slot._id') === foundSlot._id,
   })) {
-    console.error('❌ Slot booking failed');
-    console.log('Booking Response:', bookRes.body);
-    fail('❌ Slot booking failed');
+    fail('Slot booking failed');
   }
 
   sleep(1);

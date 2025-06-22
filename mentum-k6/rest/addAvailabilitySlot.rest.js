@@ -1,5 +1,3 @@
-// mentum-k6/addAvailabilitySlot.rest.js
-
 import http from 'k6/http';
 import { check, sleep } from 'k6';
 
@@ -32,9 +30,6 @@ export default function () {
   };
 
   const res = http.post(BASE_URL, JSON.stringify(payload), { headers });
-
-  console.log(`[RES ${res.status}] ${res.body}`);
-  console.log(`[SLOT] ${JSON.stringify(payload)}`);
 
   check(res, {
     'status is 201': (r) => r.status === 201,

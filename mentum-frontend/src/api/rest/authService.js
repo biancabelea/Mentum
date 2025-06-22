@@ -1,8 +1,5 @@
 import axios from 'axios';
 
-/**
- * Logs in a user with email and password.
- */
 export async function login(credentials) {
   const response = await axios.post('http://localhost:5000/auth/login', credentials, {
     headers: { 'Content-Type': 'application/json' },
@@ -13,14 +10,10 @@ export async function login(credentials) {
   localStorage.setItem('userEmail', response.data.user.email);
 
   axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-  console.log('Auth header set:', axios.defaults.headers.common['Authorization']);
 
   return response.data;
 }
 
-/**
- * Registers a new user with optional skills (if Mentor).
- */
 export async function register(user) {
   const payload = { ...user };
 
@@ -41,6 +34,6 @@ export function logout() {
     window.location.reload();
   }
   
-  export function isLoggedIn() {
+export function isLoggedIn() {
     return !!localStorage.getItem('token');
-  }
+}

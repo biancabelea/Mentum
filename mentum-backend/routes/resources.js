@@ -8,10 +8,8 @@ const router = express.Router();
 router.post('/', authMiddleware, (req, res, next) => {
     uploadMiddleware.single('file')(req, res, (err) => {
         if (err instanceof multer.MulterError) {
-            console.error('Multer Error:', err.message);
             return res.status(400).json({ message: 'File upload error', error: err.message });
         } else if (err) {
-            console.error('Error:', err.message);
             return res.status(400).json({ message: err.message });
         }
         next();
@@ -22,7 +20,6 @@ router.post('/', authMiddleware, (req, res, next) => {
         const { title, description, fileUrl } = req.body;
 
         if (!title || !description) {
-            console.error('Validation Error: Missing title or description');
             return res.status(400).json({ message: 'Title and description are required' });
         }
 
@@ -32,7 +29,6 @@ router.post('/', authMiddleware, (req, res, next) => {
         } else if (fileUrl) {
             resourceFileUrl = fileUrl;
         } else {
-            console.error('Validation Error: No file or URL provided');
             return res.status(400).json({ message: 'Either a file or a file URL is required' });
         }
 
@@ -46,7 +42,6 @@ router.post('/', authMiddleware, (req, res, next) => {
         await newResource.save();
         res.status(201).json({ message: 'Resource added successfully', resource: newResource });
     } catch (error) {
-        console.error('Error Adding Resource:', error);
         res.status(500).json({ message: 'Error adding resource', error: error.message });
     }
 });
@@ -70,7 +65,6 @@ router.get('/', async (req, res) => {
 
         res.status(200).json({ total, resources, page, pages: Math.ceil(total / limit) });
     } catch (error) {
-        console.error('Error Fetching Resources:', error);
         res.status(500).json({ message: 'Error fetching resources', error: error.message });
     }
 });
@@ -82,7 +76,6 @@ router.get('/my', authMiddleware, async (req, res) => {
             .populate('uploadedBy', 'name email'); 
         res.status(200).json({ resources: userResources });
     } catch (error) {
-        console.error('Error fetching user resources:', error);
         res.status(500).json({ message: 'Error fetching resources', error: error.message });
     }
 });
@@ -106,7 +99,6 @@ router.delete('/:id', authMiddleware, async (req, res) => {
 
         res.status(200).json({ message: 'Resource deleted successfully' });
     } catch (error) {
-        console.error('Error deleting resource:', error);
         res.status(500).json({ message: 'Error deleting resource', error: error.message });
     }
 });

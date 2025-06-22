@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const bookingSchema = new mongoose.Schema({
   slot: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Availability', // <-- this is what was missing
+    ref: 'Availability', 
     required: true,
   },
   date: {

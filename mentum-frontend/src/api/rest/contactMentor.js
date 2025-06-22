@@ -1,8 +1,5 @@
 import emailjs from 'emailjs-com';
 
-/**
- * Sends an email to a mentor using EmailJS.
- */
 export async function contactMentor({ userEmail, mentorName, mentorEmail, message, skills }) {
   const templateParams = {
     user_email: userEmail,

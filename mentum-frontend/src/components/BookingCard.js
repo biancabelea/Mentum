@@ -5,7 +5,7 @@ const BookingCard = ({ mentor, slots, onBook, refreshSlots }) => {
   const handleClick = async (slot) => {
     const success = await onBook(slot);
     if (success) {
-      refreshSlots(mentor._id); // refresh only this mentor's slots
+      refreshSlots(mentor._id);
     }
   };
   

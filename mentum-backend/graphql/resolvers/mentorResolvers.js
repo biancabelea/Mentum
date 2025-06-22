@@ -20,7 +20,7 @@ module.exports = {
             matchPercentage: Math.round(matchPercentage),
           };
         })
-        .filter((mentor) => mentor.matchPercentage >= 50); // 👈 SAME logic as REST
+        .filter((mentor) => mentor.matchPercentage >= 50);
 
       return matchingMentors;
     }

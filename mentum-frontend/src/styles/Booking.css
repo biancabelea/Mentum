@@ -1,16 +1,15 @@
 .booking-page {
-  max-width: 700px;
+  max-width: 600px;
   margin: 2rem auto;
   padding: 1.5rem;
-  background: #f9f9f9;
+  background: #f0f2f5;
   border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
 }
 
 .booking-heading {
   text-align: center;
-  margin-bottom: 1.5rem;
-  font-size: 1.6rem;
+  margin-bottom: 1rem;
   color: #333;
 }
 
@@ -23,14 +22,16 @@
 .booking-item {
   background: #fff;
   border: 1px solid #ddd;
-  padding: 1rem;
-  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
 }
 
 .cancel-button {
-  margin-top: 0.5rem;
   padding: 0.4rem 0.8rem;
-  background: #ff4d4f;
+  background-color: #ff4d4f;
   border: none;
   color: white;
   font-weight: bold;
@@ -40,7 +41,7 @@
 }
 
 .cancel-button:hover {
-  background: #d9363e;
+  background-color: #d9363e;
 }
 
 .booking-card.available {

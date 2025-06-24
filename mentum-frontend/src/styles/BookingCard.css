@@ -1,19 +1,21 @@
 .booking-card {
   background: #fff;
   border: 1px solid #ddd;
-  border-radius: 8px;
+  border-radius: 6px;
   padding: 1rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .booking-card h4 {
   margin-bottom: 0.5rem;
   color: #333;
+  font-size: 1.1rem;
 }
 
 .booking-card button {
-  margin-right: 0.5rem;
-  margin-top: 0.5rem;
   padding: 0.4rem 0.8rem;
   background-color: #4caf50;
   color: white;
@@ -21,6 +23,7 @@
   border-radius: 4px;
   cursor: pointer;
   transition: background 0.2s;
+  font-weight: bold;
 }
 
 .booking-card button:hover {

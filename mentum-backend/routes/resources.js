@@ -48,7 +48,7 @@ router.post('/', authMiddleware, (req, res, next) => {
 
 router.get('/', async (req, res) => {
     try {
-        const { search, page = 1, limit = 10 } = req.query;
+        const { search, page = 1, limit = 100 } = req.query;
         const query = search ? {
             $or: [
                 { title: { $regex: search, $options: 'i' } },

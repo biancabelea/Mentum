@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import BookingCard from './BookingCard';
 import '../styles/Booking.css';
+import '../styles/Register.css';
 import { useParams } from 'react-router-dom';
 
 const Booking = () => {
@@ -75,8 +76,9 @@ const Booking = () => {
   };
 
   return (
-    <div>
-      <h2>Book a Slot</h2>
+  <div className="body-register">
+    <div className="registration-form">
+      <div className="title">Book a Slot</div>
       {mentor && (
         <BookingCard
           mentor={mentor}
@@ -86,9 +88,9 @@ const Booking = () => {
         />
       )}
 
-      <h2>My Bookings</h2>
+      <div className="title" style={{ marginTop: '30px' }}>My Bookings</div>
       {myBookings.map((booking) => (
-        <div key={booking._id} className="booking-card booked">
+        <div key={booking._id} className={`booking-card ${booking.slot?.isBooked ? 'booked' : 'available'}`}>
           {booking.slot && (
             <>
               <p><strong>Mentor:</strong> {booking.slot.mentor?.name || 'Unknown'}</p>
@@ -104,7 +106,9 @@ const Booking = () => {
         </div>
       ))}
     </div>
-  );
+  </div>
+);
+
 };
 
 export default Booking;
